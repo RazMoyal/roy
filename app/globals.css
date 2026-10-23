@@ -21,6 +21,12 @@
   --color-footer-bg: #0c0a09;
   --color-footer-fg: #d6d3d1;
   --color-footer-muted: #a8a29e;
+  --color-price-header-bg: #fdf6e3;
+  --color-price-header-fg: #1c1917;
+  --color-price-bg: #ffffff;
+  --color-price-row-fg: #292524;
+  --color-price-amount-fg: #92400e;
+  --color-price-border: #e7e5e4;
 }
 
 @theme inline {

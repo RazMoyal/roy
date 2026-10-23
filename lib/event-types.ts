@@ -1,5 +1,5 @@
 import seedEventTypes from "@/data/event-types.json";
-import type { EventContent } from "@/types/content";
+import type { EventContent, PriceTable, PriceTableRow } from "@/types/content";
 
 /**
  * Event types live in site-content.json (`events`, in display order) and are
@@ -15,6 +15,32 @@ export function defaultEventContent(label: string): EventContent {
     title: label,
     description: `גלריית תמונות ופרטים לאירועי ${label} באולם רוי.`,
     images: [],
+  };
+}
+
+/** Sanitizes a possibly-malformed price table loaded from disk; `undefined` when absent or invalid. */
+export function normalizePriceTable(value: unknown): PriceTable | undefined {
+  if (!value || typeof value !== "object" || !("rows" in value)) return undefined;
+  const pt = value as { title?: unknown; note?: unknown; rows?: unknown };
+  if (!Array.isArray(pt.rows)) return undefined;
+
+  const rows: PriceTableRow[] = (pt.rows as unknown[])
+    .filter((row): row is Record<string, unknown> => !!row && typeof row === "object")
+    .map((row, index) => ({
+      id: typeof row.id === "string" && row.id ? row.id : `row-${index}`,
+      label: typeof row.label === "string" ? row.label : "",
+      price: typeof row.price === "string" ? row.price : "",
+      note: typeof row.note === "string" && row.note ? row.note : undefined,
+      priceNote:
+        typeof row.priceNote === "string" && row.priceNote
+          ? row.priceNote
+          : undefined,
+    }));
+
+  return {
+    title: typeof pt.title === "string" ? pt.title : "",
+    note: typeof pt.note === "string" ? pt.note : "",
+    rows,
   };
 }
 

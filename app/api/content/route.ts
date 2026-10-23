@@ -18,6 +18,14 @@ export async function PUT(request: Request) {
     return NextResponse.json({ error: "Invalid event slug" }, { status: 400 });
   }
 
+  const categorySlugs = Object.keys(body.categories ?? {});
+  if (categorySlugs.some((slug) => !isSlugFormat(slug))) {
+    return NextResponse.json(
+      { error: "Invalid category slug" },
+      { status: 400 },
+    );
+  }
+
   const previous = await readSiteContent();
   await writeSiteContent(body);
 

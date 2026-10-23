@@ -3,12 +3,13 @@
     "heroTitle": "רוי - אירועים בלתי נשכחים",
     "heroSubtitle": "חוויה בלתי נשכחת לכל סוגי האירועים - מחתונה ועד כנס עסקי",
     "aboutTitle": "למה רוי?",
-    "aboutText": "אולם רוי מציע אווירה יוקרתית, שירות מקצועי וליווי צמוד מהרגע הראשון. אנחנו מתאימים את החלל, התפריט והעיצוב לכל אירוע - כדי שתוכלו לחגוג בראש שקט.",
+    "aboutText": "רוי מציע אווירה יוקרתית, שירות מקצועי וליווי צמוד מהרגע הראשון. אנחנו מתאימים את החלל, התפריט והעיצוב לכל אירוע - כדי שתוכלו לחגוג בראש שקט.",
     "eventsSectionTitle": "סוגי אירועים",
     "contactTitle": "יצירת קשר",
     "contactText": "נשמח לשמוע על האירוע שלכם ולהציע הצעה מותאמת.",
-    "phone": "050-0000000",
-    "email": "info@roy-events.co.il"
+    "phone": "050-8328322",
+    "email": "info@roy-events.co.il",
+    "whatsappPhone": "050-8328322"
   },
   "theme": {
     "accent": "#515a76",
@@ -19,7 +20,13 @@
     "heroBg": "#000000",
     "pageBg": "#fafaf9",
     "sectionBg": "#ffffff",
-    "footerBg": "#0c0a09"
+    "footerBg": "#0c0a09",
+    "priceTableHeaderBg": "#f3ce68",
+    "priceTableHeaderText": "#1c1917",
+    "priceTableBg": "#ffffff",
+    "priceTableRowText": "#292524",
+    "priceTablePriceText": "#1c1917",
+    "priceTableBorder": "#e7e5e4"
   },
   "events": {
     "brita": {
@@ -63,7 +70,18 @@
           "order": 2
         }
       ],
-      "coverUrl": "/uploads/DS45C00949-1-1024x683.jpg"
+      "coverUrl": "/uploads/DS45C00949-1-1024x683.jpg",
+      "priceTable": {
+        "title": "מחירון",
+        "note": "",
+        "rows": [
+          {
+            "id": "013c31c9-dea5-4e35-9a98-5a0911853944",
+            "label": "",
+            "price": ""
+          }
+        ]
+      }
     },
     "bar-mitzvah": {
       "title": "בר מצווה",
@@ -211,7 +229,26 @@
           "url": "/uploads/DSC0095649-1-1024x683.jpg",
           "order": 2
         }
-      ]
+      ],
+      "priceTable": {
+        "title": "מחירון",
+        "note": "המחירים אינם כוללים מע\"מ",
+        "rows": [
+          {
+            "id": "a894bd95-4c02-459b-a71b-40dbdc4b580a",
+            "label": "חבילה מלאה",
+            "price": "35 ₪",
+            "note": "מינימום 50 איש",
+            "priceNote": "לאדם"
+          },
+          {
+            "id": "e4458d34-fe22-4257-8c4a-110f33cf455b",
+            "label": "עיצוב אולם",
+            "price": "35 ₪",
+            "priceNote": "לשולחן"
+          }
+        ]
+      }
     },
     "corporate-events": {
       "title": "אירועי חברה",
@@ -358,6 +395,61 @@
           "url": "/uploads/DSC01353-1024x683.jpg",
           "order": 2
         }
+      ]
+    }
+  },
+  "categories": {
+    "galleries": {
+      "title": "גלריות",
+      "type": "gallery",
+      "eventTypeSlugs": [
+        "brit",
+        "brita",
+        "bar-mitzvah",
+        "aliyah-latorah",
+        "bat-mitzvah",
+        "china",
+        "wedding",
+        "challah-separation",
+        "venue-rental",
+        "corporate-events",
+        "conference",
+        "toast",
+        "prom",
+        "corporate-concept",
+        "dinner",
+        "morning-seminar"
+      ]
+    },
+    "private-events": {
+      "title": "אירועים פרטיים",
+      "eventTypeSlugs": [
+        "brit",
+        "brita",
+        "bar-mitzvah",
+        "aliyah-latorah",
+        "bat-mitzvah",
+        "china",
+        "wedding",
+        "challah-separation",
+        "toast",
+        "prom",
+        "dinner"
+      ]
+    },
+    "corporate": {
+      "title": "אירועי חברה",
+      "eventTypeSlugs": [
+        "corporate-events",
+        "conference",
+        "corporate-concept",
+        "morning-seminar"
+      ]
+    },
+    "equipment-rental": {
+      "title": "השכרת ציוד",
+      "eventTypeSlugs": [
+        "venue-rental"
       ]
     }
   }

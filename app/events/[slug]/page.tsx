@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { EventPageHeader } from "@/components/events/EventPageHeader";
+import { WhatsAppContactButton } from "@/components/events/WhatsAppContactButton";
+import { EventPriceTable } from "@/components/events/EventPriceTable";
 import { GalleryGrid } from "@/components/gallery/GalleryGrid";
 import { listEventSlugs, readSiteContent } from "@/lib/content";
 
@@ -36,12 +38,18 @@ export default async function EventPage({ params }: PageProps) {
         <p className="max-w-3xl text-base leading-relaxed sm:text-lg text-stone-600">
           {event?.description}
         </p>
+            {event.priceTable && event.priceTable.rows.length > 0 && (
+          <div className="mt-10 sm:mt-12">
+            <EventPriceTable priceTable={event.priceTable} />
+          </div>
+        )}
         <h2 className="mt-10 text-xl font-semibold sm:mt-12 sm:text-2xl text-heading">
           תמונות מהאירוע
         </h2>
         <div className="mt-6">
           <GalleryGrid images={event?.images ?? []} title={title} />
         </div>
+        <WhatsAppContactButton phone={site.home.whatsappPhone} eventTitle={title} />
       </article>
     </SiteShell>
   );

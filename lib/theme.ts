@@ -11,6 +11,12 @@ export const DEFAULT_THEME: ThemeColors = {
   pageBg: "#fafaf9",
   sectionBg: "#ffffff",
   footerBg: "#0c0a09",
+  priceTableHeaderBg: "#fdf6e3",
+  priceTableHeaderText: "#1c1917",
+  priceTableBg: "#ffffff",
+  priceTableRowText: "#292524",
+  priceTablePriceText: "#92400e",
+  priceTableBorder: "#e7e5e4",
 };
 
 export const THEME_KEYS = Object.keys(DEFAULT_THEME) as (keyof ThemeColors)[];
@@ -119,6 +125,24 @@ export function buildThemeCss(theme: ThemeColors): string {
       `--color-footer-fg: ${textOn(c, "footer")};`,
       `--color-footer-muted: ${textOn(c, "footerMuted")};`,
     );
+  }
+  if (changed("priceTableHeaderBg")) {
+    vars.push(`--color-price-header-bg: ${theme.priceTableHeaderBg};`);
+  }
+  if (changed("priceTableHeaderText")) {
+    vars.push(`--color-price-header-fg: ${theme.priceTableHeaderText};`);
+  }
+  if (changed("priceTableBg")) {
+    vars.push(`--color-price-bg: ${theme.priceTableBg};`);
+  }
+  if (changed("priceTableRowText")) {
+    vars.push(`--color-price-row-fg: ${theme.priceTableRowText};`);
+  }
+  if (changed("priceTablePriceText")) {
+    vars.push(`--color-price-amount-fg: ${theme.priceTablePriceText};`);
+  }
+  if (changed("priceTableBorder")) {
+    vars.push(`--color-price-border: ${theme.priceTableBorder};`);
   }
 
   return vars.length ? `:root { ${vars.join(" ")} }` : "";

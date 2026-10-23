@@ -89,6 +89,11 @@ export function HomeEditor({ home, onChange }: HomeEditorProps) {
         value={home.email}
         onChange={(email) => onChange({ ...home, email })}
       />
+      <Field
+        label="מספר וואטסאפ (לכפתור יצירת קשר בעמודי האירועים)"
+        value={home.whatsappPhone}
+        onChange={(whatsappPhone) => onChange({ ...home, whatsappPhone })}
+      />
       <div className="sm:col-span-2">
         <Field
           label="טקסט יצירת קשר"

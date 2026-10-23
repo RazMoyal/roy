@@ -51,6 +51,41 @@ const GROUPS: { title: string; fields: Field[] }[] = [
       },
     ],
   },
+  {
+    title: "טבלת מחירים",
+    fields: [
+      {
+        key: "priceTableHeaderBg",
+        label: "רקע הכותרת",
+        hint: "האזור העליון עם שם הטבלה",
+      },
+      {
+        key: "priceTableHeaderText",
+        label: "צבע הכותרת",
+        hint: "הטקסט של שם הטבלה",
+      },
+      {
+        key: "priceTableBg",
+        label: "רקע הטבלה",
+        hint: "רקע שורות הטבלה",
+      },
+      {
+        key: "priceTableRowText",
+        label: "צבע שם הפריט",
+        hint: "השורות בטבלה (שם הפריט)",
+      },
+      {
+        key: "priceTablePriceText",
+        label: "צבע המחיר",
+        hint: "המחיר המודגש בכל שורה",
+      },
+      {
+        key: "priceTableBorder",
+        label: "מסגרת וקווים",
+        hint: "המסגרת החיצונית והקווים בין השורות",
+      },
+    ],
+  },
 ];
 
 /** Same contrast rule the site uses for text on a colored background. */
@@ -154,6 +189,47 @@ function Preview({ theme }: { theme: ThemeColors }) {
           >
             פרטים נוספים
           </span>
+        </div>
+      </div>
+      <div className="px-6 py-6" style={{ background: theme.pageBg }}>
+        <div
+          className="overflow-hidden rounded-xl"
+          style={{
+            background: theme.priceTableBg,
+            border: `1px solid ${theme.priceTableBorder}`,
+          }}
+        >
+          <div
+            className="px-4 py-3"
+            style={{
+              background: theme.priceTableHeaderBg,
+              borderBottom: `1px solid ${theme.priceTableBorder}`,
+            }}
+          >
+            <p
+              className="text-sm font-semibold"
+              style={{ color: theme.priceTableHeaderText }}
+            >
+              מחירון
+            </p>
+          </div>
+          <div
+            className="flex items-baseline justify-between px-4 py-3"
+            style={{ borderBottom: `1px solid ${theme.priceTableBorder}` }}
+          >
+            <span
+              className="text-sm font-medium"
+              style={{ color: theme.priceTableRowText }}
+            >
+              אולם + קייטרינג
+            </span>
+            <span
+              className="text-sm font-semibold"
+              style={{ color: theme.priceTablePriceText }}
+            >
+              180 ₪ לאדם
+            </span>
+          </div>
         </div>
       </div>
       <div

@@ -1,12 +1,14 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { unstable_noStore as noStore } from "next/cache";
-import type { EventContent, SiteContent } from "@/types/content";
+import type { EventCategory, EventContent, SiteContent } from "@/types/content";
 import {
   defaultEventContent,
   getSeedEventTypes,
   isSlugFormat,
+  normalizePriceTable,
 } from "@/lib/event-types";
+import { SEED_CATEGORIES } from "@/lib/categories";
 import { DEFAULT_THEME, normalizeTheme } from "@/lib/theme";
 
 const CONTENT_PATH = path.join(process.cwd(), "data", "site-content.json");
@@ -28,9 +30,11 @@ function createDefaultContent(): SiteContent {
       contactText: "נשמח לשמוע על האירוע שלכם ולהציע הצעה מותאמת.",
       phone: "050-0000000",
       email: "info@roy-events.co.il",
+      whatsappPhone: "",
     },
     theme: { ...DEFAULT_THEME },
     events,
+    categories: structuredClone(SEED_CATEGORIES),
   };
 }
 
@@ -58,12 +62,30 @@ function mergeWithDefaults(parsed: SiteContent): SiteContent {
       ...defaultEventContent(event?.title || slug),
       ...event,
       images: event?.images ?? [],
+      priceTable: normalizePriceTable(event?.priceTable),
     };
   }
+  // Categories are authoritative like events, but event type references are
+  // pruned to whatever still exists (e.g. after an event type is deleted).
+  const categorySource = parsed.categories ?? defaults.categories;
+  const categories: Record<string, EventCategory> = {};
+  for (const [slug, category] of Object.entries(categorySource)) {
+    if (!isSlugFormat(slug)) continue;
+    categories[slug] = {
+      title: category?.title || slug,
+      eventTypeSlugs: (category?.eventTypeSlugs ?? []).filter(
+        (s) => s in events,
+      ),
+      priceTable: normalizePriceTable(category?.priceTable),
+      type: category?.type === "gallery" ? "gallery" : "regular",
+    };
+  }
+
   return {
     home: { ...defaults.home, ...parsed.home },
     theme: normalizeTheme(parsed.theme),
     events,
+    categories,
   };
 }
 
