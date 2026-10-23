@@ -1,0 +1,364 @@
+{
+  "home": {
+    "heroTitle": "רוי - אירועים בלתי נשכחים",
+    "heroSubtitle": "חוויה בלתי נשכחת לכל סוגי האירועים - מחתונה ועד כנס עסקי",
+    "aboutTitle": "למה רוי?",
+    "aboutText": "אולם רוי מציע אווירה יוקרתית, שירות מקצועי וליווי צמוד מהרגע הראשון. אנחנו מתאימים את החלל, התפריט והעיצוב לכל אירוע - כדי שתוכלו לחגוג בראש שקט.",
+    "eventsSectionTitle": "סוגי אירועים",
+    "contactTitle": "יצירת קשר",
+    "contactText": "נשמח לשמוע על האירוע שלכם ולהציע הצעה מותאמת.",
+    "phone": "050-0000000",
+    "email": "info@roy-events.co.il"
+  },
+  "theme": {
+    "accent": "#515a76",
+    "headings": "#1c1917",
+    "primaryButton": "#ffc342",
+    "secondaryButton": "#000000",
+    "headerBg": "#ffffff",
+    "heroBg": "#000000",
+    "pageBg": "#fafaf9",
+    "sectionBg": "#ffffff",
+    "footerBg": "#0c0a09"
+  },
+  "events": {
+    "brita": {
+      "title": "בריתה",
+      "description": "גלריית תמונות ופרטים לאירועי בריתה באולם רוי.",
+      "images": [
+        {
+          "id": "seed-brita-1",
+          "url": "/uploads/DSC0093449-1-1024x683.jpg",
+          "order": 0
+        },
+        {
+          "id": "seed-brita-2",
+          "url": "/uploads/DSC01014-1024x683.jpg",
+          "order": 1
+        },
+        {
+          "id": "seed-brita-3",
+          "url": "/uploads/DSC01338-1024x683.jpg",
+          "order": 2
+        }
+      ]
+    },
+    "brit": {
+      "title": "ברית",
+      "description": "גלריית תמונות ופרטים לאירועי ברית באולם רוי.",
+      "images": [
+        {
+          "id": "seed-brit-3",
+          "url": "/uploads/DSC01253-1024x683.jpg",
+          "order": 0
+        },
+        {
+          "id": "seed-brit-1",
+          "url": "/uploads/DS45C00949-1-1024x683.jpg",
+          "order": 1
+        },
+        {
+          "id": "seed-brit-2",
+          "url": "/uploads/DSC0098749-1-1024x683.jpg",
+          "order": 2
+        }
+      ],
+      "coverUrl": "/uploads/DS45C00949-1-1024x683.jpg"
+    },
+    "bar-mitzvah": {
+      "title": "בר מצווה",
+      "description": "גלריית תמונות ופרטים לאירועי בר מצווה באולם רוי.",
+      "images": [
+        {
+          "id": "seed-bar-mitzvah-1",
+          "url": "/uploads/DSC00949-1024x683.jpg",
+          "order": 0
+        },
+        {
+          "id": "seed-bar-mitzvah-2",
+          "url": "/uploads/DSC01167-1024x683.jpg",
+          "order": 1
+        },
+        {
+          "id": "seed-bar-mitzvah-3",
+          "url": "/uploads/DSC01353-1024x683.jpg",
+          "order": 2
+        }
+      ],
+      "coverUrl": "/uploads/DSC01167-1024x683.jpg"
+    },
+    "aliyah-latorah": {
+      "title": "עלייה לתורה",
+      "description": "גלריית תמונות ופרטים לאירועי עלייה לתורה באולם רוי.",
+      "images": [
+        {
+          "id": "seed-aliyah-latorah-1",
+          "url": "/uploads/DSC00954-1024x683.jpg",
+          "order": 0
+        },
+        {
+          "id": "seed-aliyah-latorah-2",
+          "url": "/uploads/DSC01197-1024x683.jpg",
+          "order": 1
+        },
+        {
+          "id": "seed-aliyah-latorah-3",
+          "url": "/uploads/DSC01382.jpg",
+          "order": 2
+        }
+      ]
+    },
+    "bat-mitzvah": {
+      "title": "בת מצווה",
+      "description": "גלריית תמונות ופרטים לאירועי בת מצווה באולם רוי.",
+      "images": [
+        {
+          "id": "seed-bat-mitzvah-1",
+          "url": "/uploads/DSC0095649-1-1024x683.jpg",
+          "order": 0
+        },
+        {
+          "id": "seed-bat-mitzvah-2",
+          "url": "/uploads/DSC01253-1024x683.jpg",
+          "order": 1
+        },
+        {
+          "id": "seed-bat-mitzvah-3",
+          "url": "/uploads/DS45C00949-1-1024x683.jpg",
+          "order": 2
+        }
+      ]
+    },
+    "china": {
+      "title": "חינה",
+      "description": "גלריית תמונות ופרטים לאירועי חינה באולם רוי.",
+      "images": [
+        {
+          "id": "seed-china-1",
+          "url": "/uploads/DSC0098749-1-1024x683.jpg",
+          "order": 0
+        },
+        {
+          "id": "seed-china-2",
+          "url": "/uploads/DSC01338-1024x683.jpg",
+          "order": 1
+        },
+        {
+          "id": "seed-china-3",
+          "url": "/uploads/DSC0093449-1-1024x683.jpg",
+          "order": 2
+        }
+      ]
+    },
+    "wedding": {
+      "title": "חתונה",
+      "description": "גלריית תמונות ופרטים לאירועי חתונה באולם רוי.",
+      "images": [
+        {
+          "id": "seed-wedding-1",
+          "url": "/uploads/DSC01014-1024x683.jpg",
+          "order": 0
+        },
+        {
+          "id": "seed-wedding-2",
+          "url": "/uploads/DSC01353-1024x683.jpg",
+          "order": 1
+        },
+        {
+          "id": "seed-wedding-3",
+          "url": "/uploads/DSC00949-1024x683.jpg",
+          "order": 2
+        }
+      ]
+    },
+    "challah-separation": {
+      "title": "הפרשת חלה מקווה",
+      "description": "גלריית תמונות ופרטים לאירועי הפרשת חלה מקווה באולם רוי.",
+      "images": [
+        {
+          "id": "seed-challah-separation-1",
+          "url": "/uploads/DSC01167-1024x683.jpg",
+          "order": 0
+        },
+        {
+          "id": "seed-challah-separation-2",
+          "url": "/uploads/DSC01382.jpg",
+          "order": 1
+        },
+        {
+          "id": "seed-challah-separation-3",
+          "url": "/uploads/DSC00954-1024x683.jpg",
+          "order": 2
+        }
+      ]
+    },
+    "venue-rental": {
+      "title": "השכרת מתחם",
+      "description": "גלריית תמונות ופרטים לאירועי השכרת מתחם באולם רוי.",
+      "images": [
+        {
+          "id": "seed-venue-rental-1",
+          "url": "/uploads/DSC01197-1024x683.jpg",
+          "order": 0
+        },
+        {
+          "id": "seed-venue-rental-2",
+          "url": "/uploads/DS45C00949-1-1024x683.jpg",
+          "order": 1
+        },
+        {
+          "id": "seed-venue-rental-3",
+          "url": "/uploads/DSC0095649-1-1024x683.jpg",
+          "order": 2
+        }
+      ]
+    },
+    "corporate-events": {
+      "title": "אירועי חברה",
+      "description": "גלריית תמונות ופרטים לאירועי אירועי חברה באולם רוי.",
+      "images": [
+        {
+          "id": "seed-corporate-events-1",
+          "url": "/uploads/DSC01253-1024x683.jpg",
+          "order": 0
+        },
+        {
+          "id": "seed-corporate-events-2",
+          "url": "/uploads/DSC0093449-1-1024x683.jpg",
+          "order": 1
+        },
+        {
+          "id": "seed-corporate-events-3",
+          "url": "/uploads/DSC0098749-1-1024x683.jpg",
+          "order": 2
+        }
+      ]
+    },
+    "conference": {
+      "title": "כנס",
+      "description": "גלריית תמונות ופרטים לאירועי כנס באולם רוי.",
+      "images": [
+        {
+          "id": "seed-conference-1",
+          "url": "/uploads/DSC01338-1024x683.jpg",
+          "order": 0
+        },
+        {
+          "id": "seed-conference-2",
+          "url": "/uploads/DSC00949-1024x683.jpg",
+          "order": 1
+        },
+        {
+          "id": "seed-conference-3",
+          "url": "/uploads/DSC01014-1024x683.jpg",
+          "order": 2
+        }
+      ]
+    },
+    "toast": {
+      "title": "הרמת כוסית",
+      "description": "גלריית תמונות ופרטים לאירועי הרמת כוסית באולם רוי.",
+      "images": [
+        {
+          "id": "seed-toast-1",
+          "url": "/uploads/DSC01353-1024x683.jpg",
+          "order": 0
+        },
+        {
+          "id": "seed-toast-2",
+          "url": "/uploads/DSC00954-1024x683.jpg",
+          "order": 1
+        },
+        {
+          "id": "seed-toast-3",
+          "url": "/uploads/DSC01167-1024x683.jpg",
+          "order": 2
+        }
+      ]
+    },
+    "prom": {
+      "title": "נשף",
+      "description": "גלריית תמונות ופרטים לאירועי נשף באולם רוי.",
+      "images": [
+        {
+          "id": "seed-prom-1",
+          "url": "/uploads/DSC01382.jpg",
+          "order": 0
+        },
+        {
+          "id": "seed-prom-2",
+          "url": "/uploads/DSC0095649-1-1024x683.jpg",
+          "order": 1
+        },
+        {
+          "id": "seed-prom-3",
+          "url": "/uploads/DSC01197-1024x683.jpg",
+          "order": 2
+        }
+      ]
+    },
+    "corporate-concept": {
+      "title": "אירוע חברה קונספט",
+      "description": "גלריית תמונות ופרטים לאירועי אירוע חברה קונספט באולם רוי.",
+      "images": [
+        {
+          "id": "seed-corporate-concept-1",
+          "url": "/uploads/DS45C00949-1-1024x683.jpg",
+          "order": 0
+        },
+        {
+          "id": "seed-corporate-concept-2",
+          "url": "/uploads/DSC0098749-1-1024x683.jpg",
+          "order": 1
+        },
+        {
+          "id": "seed-corporate-concept-3",
+          "url": "/uploads/DSC01253-1024x683.jpg",
+          "order": 2
+        }
+      ]
+    },
+    "dinner": {
+      "title": "ארוחת ערב",
+      "description": "גלריית תמונות ופרטים לאירועי ארוחת ערב באולם רוי.",
+      "images": [
+        {
+          "id": "seed-dinner-1",
+          "url": "/uploads/DSC0093449-1-1024x683.jpg",
+          "order": 0
+        },
+        {
+          "id": "seed-dinner-2",
+          "url": "/uploads/DSC01014-1024x683.jpg",
+          "order": 1
+        },
+        {
+          "id": "seed-dinner-3",
+          "url": "/uploads/DSC01338-1024x683.jpg",
+          "order": 2
+        }
+      ]
+    },
+    "morning-seminar": {
+      "title": "בוקר יום עיון",
+      "description": "גלריית תמונות ופרטים לאירועי בוקר יום עיון באולם רוי.",
+      "images": [
+        {
+          "id": "seed-morning-seminar-1",
+          "url": "/uploads/DSC00949-1024x683.jpg",
+          "order": 0
+        },
+        {
+          "id": "seed-morning-seminar-2",
+          "url": "/uploads/DSC01167-1024x683.jpg",
+          "order": 1
+        },
+        {
+          "id": "seed-morning-seminar-3",
+          "url": "/uploads/DSC01353-1024x683.jpg",
+          "order": 2
+        }
+      ]
+    }
+  }
+}
