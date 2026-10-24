@@ -24,7 +24,7 @@ export function EventPriceTable({ priceTable }: EventPriceTableProps) {
                 <p className="mt-0.5 text-sm text-stone-500">{row.note}</p>
               )}
             </div>
-            <div className="shrink-0 text-right">
+            <div className="min-w-0 text-right">
               <span className="text-lg font-semibold text-price-amount-fg">
                 {row.price}
               </span>

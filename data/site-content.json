@@ -401,7 +401,6 @@
   "categories": {
     "galleries": {
       "title": "גלריות",
-      "type": "gallery",
       "eventTypeSlugs": [
         "brit",
         "brita",
@@ -419,7 +418,8 @@
         "corporate-concept",
         "dinner",
         "morning-seminar"
-      ]
+      ],
+      "type": "gallery"
     },
     "private-events": {
       "title": "אירועים פרטיים",
@@ -435,7 +435,8 @@
         "toast",
         "prom",
         "dinner"
-      ]
+      ],
+      "type": "regular"
     },
     "corporate": {
       "title": "אירועי חברה",
@@ -444,13 +445,15 @@
         "conference",
         "corporate-concept",
         "morning-seminar"
-      ]
+      ],
+      "type": "regular"
     },
     "equipment-rental": {
       "title": "השכרת ציוד",
       "eventTypeSlugs": [
         "venue-rental"
-      ]
+      ],
+      "type": "regular"
     }
   }
 }

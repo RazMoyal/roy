@@ -38,7 +38,7 @@ export default async function EventPage({ params }: PageProps) {
         <p className="max-w-3xl text-base leading-relaxed sm:text-lg text-stone-600">
           {event?.description}
         </p>
-            {event.priceTable && event.priceTable.rows.length > 0 && (
+        {event.priceTable && event.priceTable.rows.length > 0 && (
           <div className="mt-10 sm:mt-12">
             <EventPriceTable priceTable={event.priceTable} />
           </div>
