@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import type { GalleryImage } from "@/types/content";
 
@@ -18,6 +19,8 @@ export function CoverImageEditor({
 }: CoverImageEditorProps) {
   const sorted = [...images].sort((a, b) => a.order - b.order);
   const shownUrl = coverUrl || sorted[0]?.url;
+  const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   // A cover uploaded just for the card (not part of the gallery) is removed
   // from disk once it is replaced, so it doesn't linger in uploads.
@@ -37,14 +40,32 @@ export function CoverImageEditor({
   }
 
   async function handleUpload(file: File) {
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("slug", slug);
+    setUploading(true);
+    setError(null);
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("slug", slug);
 
-    const res = await fetch("/api/upload", { method: "POST", body: formData });
-    if (!res.ok) return;
-    const { url } = (await res.json()) as { url: string };
-    await select(url);
+      const res = await fetch("/api/upload", { method: "POST", body: formData });
+      if (!res.ok) {
+        const data = (await res.json().catch(() => null)) as
+          | { error?: string }
+          | null;
+        setError(
+          data?.error === "File must be an image"
+            ? "סוג הקובץ לא נתמך — יש להעלות תמונה (JPG, PNG, WebP וכו׳)"
+            : "העלאת התמונה נכשלה, נסו שוב",
+        );
+        return;
+      }
+      const { url } = (await res.json()) as { url: string };
+      await select(url);
+    } catch {
+      setError("העלאת התמונה נכשלה — בדקו את החיבור לאינטרנט ונסו שוב");
+    } finally {
+      setUploading(false);
+    }
   }
 
   return (
@@ -66,10 +87,11 @@ export function CoverImageEditor({
               : "לא נבחרה תמונה — מוצגת התמונה הראשונה בגלריה."}
           </p>
           <label className="cursor-pointer rounded-lg border border-stone-300 bg-white px-3 py-1.5 text-center text-xs font-medium hover:bg-stone-100">
-            העלאת תמונה ראשית חדשה
+            {uploading ? "מעלה תמונה..." : "העלאת תמונה ראשית חדשה"}
             <input
               type="file"
               accept="image/*"
+              disabled={uploading}
               className="hidden"
               onChange={(e) => {
                 const file = e.target.files?.[0];
@@ -78,6 +100,7 @@ export function CoverImageEditor({
               }}
             />
           </label>
+          {error && <p className="text-xs text-red-700">{error}</p>}
           {coverUrl && (
             <button
               type="button"

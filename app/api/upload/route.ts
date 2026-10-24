@@ -4,6 +4,15 @@ import path from "path";
 import { randomUUID } from "crypto";
 import { isSlugFormat } from "@/lib/event-types";
 
+// Some mobile browsers (notably for HEIC camera photos, or certain gallery
+// pickers) send an empty or generic file.type, so the MIME check alone is
+// unreliable — fall back to the file extension.
+const IMAGE_EXTENSION = /\.(jpe?g|png|gif|webp|avif|heic|heif|bmp|svg)$/i;
+
+function looksLikeImage(file: File): boolean {
+  return file.type.startsWith("image/") || IMAGE_EXTENSION.test(file.name);
+}
+
 export async function POST(request: Request) {
   const formData = await request.formData();
   const file = formData.get("file");
@@ -17,7 +26,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "No file provided" }, { status: 400 });
   }
 
-  if (!file.type.startsWith("image/")) {
+  if (!looksLikeImage(file)) {
     return NextResponse.json({ error: "File must be an image" }, { status: 400 });
   }
 
