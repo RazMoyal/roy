@@ -1,12 +1,23 @@
 import { NextResponse } from "next/server";
-import { isSlugFormat } from "@/lib/event-types";
+import { cookies } from "next/headers";
+import { HOME_HERO_SLUG, isSlugFormat } from "@/lib/event-types";
+import { SESSION_COOKIE, isValidSessionToken } from "@/lib/auth";
 import {
   deleteEventImage,
   eventFolder,
+  resourceTypeFromUrl,
   uploadEventImage,
 } from "@/lib/cloudinary";
 
+async function requireAuth() {
+  const cookieStore = await cookies();
+  return isValidSessionToken(cookieStore.get(SESSION_COOKIE)?.value);
+}
+
 export async function POST(request: Request) {
+  if (!(await requireAuth())) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
   const formData = await request.formData();
   const file = formData.get("file");
   const slug = formData.get("slug");
@@ -21,16 +32,23 @@ export async function POST(request: Request) {
 
   const buffer = Buffer.from(await file.arrayBuffer());
 
-  // No MIME/extension allowlist here — some mobile browsers send an empty or
-  // generic file.type (notably for HEIC), and a hand-maintained extension
-  // list would always lag behind the formats people actually use. Cloudinary
-  // itself validates the content against resource_type: "image" and rejects
-  // anything that isn't a real image, so it's the single source of truth.
+  // Only the hero media slot accepts video; every other upload (gallery,
+  // cover, banner) stays image-only. No MIME/extension allowlist beyond
+  // that — some mobile browsers send an empty or generic file.type (notably
+  // for HEIC), and a hand-maintained extension list would always lag behind
+  // the formats people actually use. Cloudinary itself validates the
+  // content against the requested resource_type and rejects anything that
+  // doesn't match, so it's the single source of truth.
+  const isHeroSlug = slug === HOME_HERO_SLUG;
+  const resourceType = isHeroSlug && file.type.startsWith("video/") ? "video" : "image";
   try {
-    const { publicId, url } = await uploadEventImage(buffer, slug);
-    return NextResponse.json({ id: publicId, url });
+    const { publicId, url } = await uploadEventImage(buffer, slug, resourceType);
+    return NextResponse.json({ id: publicId, url, resourceType });
   } catch {
-    return NextResponse.json({ error: "File must be an image" }, { status: 400 });
+    return NextResponse.json(
+      { error: isHeroSlug ? "File must be an image or video" : "File must be an image" },
+      { status: 400 },
+    );
   }
 }
 
@@ -47,6 +65,9 @@ function publicIdFromUrl(url: string): string | null {
 }
 
 export async function DELETE(request: Request) {
+  if (!(await requireAuth())) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
   const { slug, url } = (await request.json()) as {
     slug: string;
     url: string;
@@ -63,6 +84,6 @@ export async function DELETE(request: Request) {
     return NextResponse.json({ ok: true });
   }
 
-  await deleteEventImage(publicId);
+  await deleteEventImage(publicId, resourceTypeFromUrl(url));
   return NextResponse.json({ ok: true });
 }

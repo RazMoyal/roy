@@ -1,7 +1,7 @@
 import type { EventCategory } from "@/types/content";
 
 export function defaultCategory(title: string): EventCategory {
-  return { title, eventTypeSlugs: [], type: "regular" };
+  return { title, eventTypeSlugs: [], priceTables: [], type: "regular" };
 }
 
 /**
@@ -13,6 +13,7 @@ export const SEED_CATEGORIES: Record<string, EventCategory> = {
   galleries: {
     title: "גלריות",
     type: "gallery",
+    priceTables: [],
     eventTypeSlugs: [
       "brit",
       "brita",
@@ -35,6 +36,7 @@ export const SEED_CATEGORIES: Record<string, EventCategory> = {
   "private-events": {
     title: "אירועים פרטיים",
     type: "regular",
+    priceTables: [],
     eventTypeSlugs: [
       "brit",
       "brita",
@@ -52,6 +54,7 @@ export const SEED_CATEGORIES: Record<string, EventCategory> = {
   corporate: {
     title: "אירועי חברה",
     type: "regular",
+    priceTables: [],
     eventTypeSlugs: [
       "corporate-events",
       "conference",
@@ -62,6 +65,7 @@ export const SEED_CATEGORIES: Record<string, EventCategory> = {
   "equipment-rental": {
     title: "השכרת ציוד",
     type: "regular",
+    priceTables: [],
     eventTypeSlugs: ["venue-rental"],
   },
 };

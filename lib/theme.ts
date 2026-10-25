@@ -5,9 +5,12 @@ export const DEFAULT_THEME: ThemeColors = {
   accent: "#d97706",
   headings: "#1c1917",
   primaryButton: "#d97706",
+  primaryButtonText: "#ffffff",
   secondaryButton: "#1c1917",
+  secondaryButtonText: "#ffffff",
   headerBg: "#ffffff",
   heroBg: "#0c0a09",
+  heroCardBg: "#ffffff",
   pageBg: "#fafaf9",
   sectionBg: "#ffffff",
   footerBg: "#0c0a09",
@@ -21,10 +24,33 @@ export const DEFAULT_THEME: ThemeColors = {
 
 export const THEME_KEYS = Object.keys(DEFAULT_THEME) as (keyof ThemeColors)[];
 
-const HEX_COLOR = /^#[0-9a-fA-F]{6}$/;
+/** 6-digit hex, optionally followed by a 2-digit alpha channel (CSS #RRGGBBAA). */
+const HEX_COLOR_ALPHA = /^#[0-9a-fA-F]{6}([0-9a-fA-F]{2})?$/;
 
 export function isHexColor(value: string): boolean {
-  return HEX_COLOR.test(value);
+  return HEX_COLOR_ALPHA.test(value);
+}
+
+/** The opaque RGB part of a color, stripping any alpha channel. */
+export function hexBase(hex: string): string {
+  return hex.slice(0, 7);
+}
+
+/** Alpha channel as 0-100, defaulting to fully opaque when absent. */
+export function hexOpacity(hex: string): number {
+  if (hex.length !== 9) return 100;
+  return Math.round((parseInt(hex.slice(7, 9), 16) / 255) * 100);
+}
+
+/** Sets the alpha channel (0-100) on a 6- or 8-digit hex color. */
+export function withOpacity(hex: string, opacity: number): string {
+  const base = hexBase(hex);
+  const clamped = Math.max(0, Math.min(100, opacity));
+  if (clamped >= 100) return base;
+  const alpha = Math.round((clamped / 100) * 255)
+    .toString(16)
+    .padStart(2, "0");
+  return `${base}${alpha}`;
 }
 
 function mix(color: string, other: "white" | "black", percent: number) {
@@ -41,7 +67,7 @@ function luminance(hex: string): number {
 
 /** Whether dark text reads better than white text on this background. */
 export function isLightColor(hex: string): boolean {
-  const l = luminance(hex);
+  const l = luminance(hexBase(hex));
   // Contrast against near-black text (#1c1917) vs. against white text.
   return (l + 0.05) / 0.06 > 1.05 / (l + 0.05);
 }
@@ -83,18 +109,16 @@ export function buildThemeCss(theme: ThemeColors): string {
   if (changed("headings")) {
     vars.push(`--color-heading: ${theme.headings};`);
   }
-  if (changed("primaryButton")) {
-    const c = theme.primaryButton;
+  if (changed("primaryButton") || changed("primaryButtonText")) {
     vars.push(
-      `--color-btn-primary: ${c};`,
-      `--color-btn-primary-fg: ${textOn(c, "fg")};`,
+      `--color-btn-primary: ${theme.primaryButton};`,
+      `--color-btn-primary-fg: ${theme.primaryButtonText};`,
     );
   }
-  if (changed("secondaryButton")) {
-    const c = theme.secondaryButton;
+  if (changed("secondaryButton") || changed("secondaryButtonText")) {
     vars.push(
-      `--color-btn-secondary: ${c};`,
-      `--color-btn-secondary-fg: ${textOn(c, "fg")};`,
+      `--color-btn-secondary: ${theme.secondaryButton};`,
+      `--color-btn-secondary-fg: ${theme.secondaryButtonText};`,
     );
   }
   if (changed("headerBg")) {
@@ -110,6 +134,14 @@ export function buildThemeCss(theme: ThemeColors): string {
       `--color-hero-bg: ${c};`,
       `--color-hero-fg: ${textOn(c, "fg")};`,
       `--color-hero-muted: ${textOn(c, "muted")};`,
+    );
+  }
+  if (changed("heroCardBg")) {
+    const c = theme.heroCardBg;
+    vars.push(
+      `--color-hero-card: ${c};`,
+      `--color-hero-card-fg: ${textOn(c, "fg")};`,
+      `--color-hero-card-muted: ${textOn(c, "muted")};`,
     );
   }
   if (changed("pageBg")) {

@@ -35,11 +35,11 @@ export function EventEditor({ slug, event, onChange }: EventEditorProps) {
       
       <div>
         <h3 className="mb-3 text-sm font-semibold text-stone-800">
-          טבלת מחירים (אופציונלי, מוצגת בעמוד סוג האירוע)
+          טבלאות מחירים (אופציונלי, מוצגות בעמוד סוג האירוע)
         </h3>
         <PriceTableEditor
-          priceTable={event.priceTable}
-          onChange={(priceTable) => onChange({ ...event, priceTable })}
+          priceTables={event.priceTables}
+          onChange={(priceTables) => onChange({ ...event, priceTables })}
         />
       </div>
       <div>

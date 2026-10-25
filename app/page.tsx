@@ -39,7 +39,7 @@ export default async function Home({ searchParams }: HomeProps) {
         sectionTitle={site.home.eventsSectionTitle}
         events={events}
         activeCategoryTitle={activeCategory?.title}
-        activeCategoryPriceTable={activeCategory?.priceTable}
+        activeCategoryPriceTables={activeCategory?.priceTables}
       />
       <ContactSection content={site.home} />
     </SiteShell>

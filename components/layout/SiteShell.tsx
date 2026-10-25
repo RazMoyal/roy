@@ -1,5 +1,6 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { FloatingContactButtons } from "@/components/layout/FloatingContactButtons";
 import { readSiteContent } from "@/lib/content";
 import { buildThemeCss } from "@/lib/theme";
 
@@ -8,7 +9,7 @@ type SiteShellProps = {
 };
 
 export async function SiteShell({ children }: SiteShellProps) {
-  const { theme } = await readSiteContent();
+  const { theme, home } = await readSiteContent();
   const themeCss = buildThemeCss(theme);
 
   return (
@@ -17,6 +18,7 @@ export async function SiteShell({ children }: SiteShellProps) {
       <Header />
       <div className="flex-1">{children}</div>
       <Footer />
+      <FloatingContactButtons phone={home.phone} whatsappPhone={home.whatsappPhone} />
     </>
   );
 }

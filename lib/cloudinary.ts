@@ -21,19 +21,30 @@ export type UploadedImage = {
   url: string;
 };
 
+export type CloudinaryResourceType = "image" | "video";
+
 export async function uploadEventImage(
   buffer: Buffer,
   slug: string,
+  resourceType: CloudinaryResourceType = "image",
 ): Promise<UploadedImage> {
   const result = await cloudinary.uploader.upload(
     `data:application/octet-stream;base64,${buffer.toString("base64")}`,
-    { folder: eventFolder(slug), resource_type: "image" },
+    { folder: eventFolder(slug), resource_type: resourceType },
   );
   return { publicId: result.public_id, url: result.secure_url };
 }
 
-export async function deleteEventImage(publicId: string): Promise<void> {
-  await cloudinary.uploader.destroy(publicId);
+export async function deleteEventImage(
+  publicId: string,
+  resourceType: CloudinaryResourceType = "image",
+): Promise<void> {
+  await cloudinary.uploader.destroy(publicId, { resource_type: resourceType });
+}
+
+/** Cloudinary delivery URLs encode the resource type in the path (.../image/upload/... vs .../video/upload/...). */
+export function resourceTypeFromUrl(url: string): CloudinaryResourceType {
+  return url.includes("/video/upload/") ? "video" : "image";
 }
 
 export type CloudinaryImage = {

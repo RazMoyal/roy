@@ -53,9 +53,11 @@ export default async function CategoryGalleryPage({ params }: PageProps) {
         </div>
       </div>
       <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
-        {category.priceTable && category.priceTable.rows.length > 0 && (
-          <div className="mb-14">
-            <EventPriceTable priceTable={category.priceTable} />
+        {category.priceTables.length > 0 && (
+          <div className="mb-14 space-y-8">
+            {category.priceTables.map((priceTable) => (
+              <EventPriceTable key={priceTable.id} priceTable={priceTable} />
+            ))}
           </div>
         )}
         <div className="space-y-14">

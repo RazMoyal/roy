@@ -1,6 +1,7 @@
 "use client";
 
 import type { HomeContent } from "@/types/content";
+import { HeroMediaEditor } from "@/components/admin/HeroMediaEditor";
 
 type HomeEditorProps = {
   home: HomeContent;
@@ -44,6 +45,18 @@ function Field({
 export function HomeEditor({ home, onChange }: HomeEditorProps) {
   return (
     <div className="grid gap-4 sm:grid-cols-2">
+      <div className="sm:col-span-2">
+        <h3 className="mb-3 text-sm font-semibold text-stone-800">
+          רקע ה-Hero (תמונה או סרטון)
+        </h3>
+        <HeroMediaEditor
+          mediaUrl={home.heroMediaUrl}
+          mediaType={home.heroMediaType}
+          onChange={(heroMediaUrl, heroMediaType) =>
+            onChange({ ...home, heroMediaUrl, heroMediaType })
+          }
+        />
+      </div>
       <Field
         label="כותרת ראשית (Hero)"
         value={home.heroTitle}

@@ -8,15 +8,15 @@ type EventsSectionProps = {
   events: SiteContent["events"];
   /** Set when a category filter from the Hero buttons is active. */
   activeCategoryTitle?: string | null;
-  /** The active category's price table, if it has one with rows. */
-  activeCategoryPriceTable?: PriceTable | null;
+  /** The active category's price tables, if it has any. */
+  activeCategoryPriceTables?: PriceTable[];
 };
 
 export function EventsSection({
   sectionTitle,
   events,
   activeCategoryTitle,
-  activeCategoryPriceTable,
+  activeCategoryPriceTables,
 }: EventsSectionProps) {
   return (
     <section id="events" className="bg-page-bg py-14 sm:py-20">
@@ -34,9 +34,11 @@ export function EventsSection({
             </Link>
           )}
         </div>
-        {activeCategoryPriceTable && activeCategoryPriceTable.rows.length > 0 && (
-          <div className="mt-6 sm:mt-8">
-            <EventPriceTable priceTable={activeCategoryPriceTable} />
+        {activeCategoryPriceTables && activeCategoryPriceTables.length > 0 && (
+          <div className="mt-6 space-y-8 sm:mt-8">
+            {activeCategoryPriceTables.map((priceTable) => (
+              <EventPriceTable key={priceTable.id} priceTable={priceTable} />
+            ))}
           </div>
         )}
         <div className="mt-8 grid gap-4 sm:mt-10 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">

@@ -177,13 +177,13 @@ export function CategoryEditor({
 
             <div className="mt-4">
               <span className="text-xs font-medium text-stone-700">
-                טבלת מחירים לקטגוריה (מוצגת מעל רשימת סוגי האירועים בעמוד הבית)
+                טבלאות מחירים לקטגוריה (מוצגות מעל רשימת סוגי האירועים בעמוד הבית)
               </span>
               <div className="mt-2">
                 <PriceTableEditor
-                  priceTable={category.priceTable}
-                  onChange={(priceTable) =>
-                    updateCategory(slug, { ...category, priceTable })
+                  priceTables={category.priceTables}
+                  onChange={(priceTables) =>
+                    updateCategory(slug, { ...category, priceTables })
                   }
                 />
               </div>

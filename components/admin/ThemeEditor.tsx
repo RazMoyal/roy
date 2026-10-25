@@ -1,7 +1,14 @@
 "use client";
 
 import type { ThemeColors } from "@/types/content";
-import { DEFAULT_THEME, isHexColor, isLightColor } from "@/lib/theme";
+import {
+  DEFAULT_THEME,
+  hexBase,
+  hexOpacity,
+  isHexColor,
+  isLightColor,
+  withOpacity,
+} from "@/lib/theme";
 
 type ThemeEditorProps = {
   theme: ThemeColors;
@@ -16,13 +23,23 @@ const GROUPS: { title: string; fields: Field[] }[] = [
     fields: [
       {
         key: "primaryButton",
-        label: "כפתור ראשי",
+        label: "כפתור ראשי - רקע",
         hint: "״גלו את סוגי האירועים״ בכותרת הראשית",
       },
       {
+        key: "primaryButtonText",
+        label: "כפתור ראשי - טקסט",
+        hint: "צבע הטקסט על הכפתור הראשי",
+      },
+      {
         key: "secondaryButton",
-        label: "כפתורי קארדים",
+        label: "כפתורי קארדים - רקע",
         hint: "״פרטים נוספים״ בקארדים של סוגי האירועים",
+      },
+      {
+        key: "secondaryButtonText",
+        label: "כפתורי קארדים - טקסט",
+        hint: "צבע הטקסט על כפתורי הקארדים",
       },
     ],
   },
@@ -31,6 +48,11 @@ const GROUPS: { title: string; fields: Field[] }[] = [
     fields: [
       { key: "headerBg", label: "סרגל עליון", hint: "הפס עם הלוגו והתפריט" },
       { key: "heroBg", label: "כותרת ראשית", hint: "האזור הגדול בראש דף הבית" },
+      {
+        key: "heroCardBg",
+        label: "קארד בכותרת הראשית",
+        hint: "הקארד השקוף מעל התמונה/סרטון בהירו",
+      },
       {
         key: "pageBg",
         label: "רקע כללי",
@@ -106,6 +128,10 @@ function ColorField({
   defaultValue: string;
   onChange: (v: string) => void;
 }) {
+  const valid = isHexColor(value);
+  const base = valid ? hexBase(value) : defaultValue;
+  const opacity = valid ? hexOpacity(value) : 100;
+
   return (
     <div className="rounded-xl border border-stone-200 p-4">
       <p className="text-sm font-medium text-stone-700">{label}</p>
@@ -113,8 +139,8 @@ function ColorField({
       <div className="mt-3 flex flex-wrap items-center gap-2">
         <input
           type="color"
-          value={isHexColor(value) ? value : defaultValue}
-          onChange={(e) => onChange(e.target.value)}
+          value={base}
+          onChange={(e) => onChange(withOpacity(e.target.value, opacity))}
           className="h-10 w-14 cursor-pointer rounded border border-stone-300 bg-white p-1"
           aria-label={label}
         />
@@ -123,7 +149,7 @@ function ColorField({
           value={value}
           onChange={(e) => onChange(e.target.value.trim())}
           className={`w-28 rounded-lg border px-3 py-2 font-mono text-sm ${
-            isHexColor(value) ? "border-stone-300" : "border-red-400"
+            valid ? "border-stone-300" : "border-red-400"
           }`}
         />
         {value !== defaultValue && (
@@ -135,6 +161,23 @@ function ColorField({
             ברירת מחדל
           </button>
         )}
+      </div>
+      <div className="mt-3 flex items-center gap-2">
+        <label className="text-xs text-stone-500" htmlFor={`${label}-opacity`}>
+          שקיפות
+        </label>
+        <input
+          id={`${label}-opacity`}
+          type="range"
+          min={0}
+          max={100}
+          value={opacity}
+          onChange={(e) => onChange(withOpacity(base, Number(e.target.value)))}
+          className="h-1.5 flex-1 cursor-pointer accent-amber-600"
+        />
+        <span className="w-10 text-left text-xs text-stone-500" dir="ltr">
+          {opacity}%
+        </span>
       </div>
     </div>
   );
@@ -161,7 +204,7 @@ function Preview({ theme }: { theme: ThemeColors }) {
           className="mt-4 inline-flex rounded-full px-4 py-2 text-sm font-semibold"
           style={{
             background: theme.primaryButton,
-            color: textOn(theme.primaryButton),
+            color: theme.primaryButtonText,
           }}
         >
           גלו את סוגי האירועים
@@ -184,7 +227,7 @@ function Preview({ theme }: { theme: ThemeColors }) {
             className="mt-3 inline-flex rounded-full px-3 py-1.5 text-xs font-medium"
             style={{
               background: theme.secondaryButton,
-              color: textOn(theme.secondaryButton),
+              color: theme.secondaryButtonText,
             }}
           >
             פרטים נוספים

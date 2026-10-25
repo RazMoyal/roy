@@ -6,16 +6,15 @@ export type GalleryImage = {
 
 export type PriceTableRow = {
   id: string;
-  label: string;
-  price: string;
-  /** Optional small print under the item label, e.g. "מינימום 50 אורחים". */
-  note?: string;
-  /** Optional small print next to the price, e.g. "לא כולל מע״מ" or "לאדם". */
-  priceNote?: string;
+  /** One cell per column, aligned by index with the table's `columns`. */
+  cells: string[];
 };
 
 export type PriceTable = {
+  id: string;
   title: string;
+  /** Column headers; a table can have any number of columns. */
+  columns: string[];
   rows: PriceTableRow[];
   /** Optional small print under the table, e.g. "המחירים אינם כוללים מע״מ". */
   note: string;
@@ -27,15 +26,18 @@ export type EventContent = {
   /** Card image on the home page; falls back to the first gallery image. */
   coverUrl?: string;
   images: GalleryImage[];
-  /** Not every event type has one — only present when the admin added it. */
-  priceTable?: PriceTable;
-  /** Optional full-width image shown below the price table on the event type page. */
+  /** Empty unless the admin added tables. */
+  priceTables: PriceTable[];
+  /** Optional full-width image shown below the price tables on the event type page. */
   bannerUrl?: string;
 };
 
 export type HomeContent = {
   heroTitle: string;
   heroSubtitle: string;
+  /** Background media for the hero section; absent falls back to the theme's gradient background. */
+  heroMediaUrl?: string;
+  heroMediaType?: "image" | "video";
   aboutTitle: string;
   aboutText: string;
   eventsSectionTitle: string;
@@ -58,8 +60,8 @@ export type EventCategory = {
   title: string;
   /** Event type slugs in this category; an event type may appear in several categories. */
   eventTypeSlugs: string[];
-  /** Not every category has one — only present when the admin added it. Shown above the event type list when this category is selected. */
-  priceTable?: PriceTable;
+  /** Empty unless the admin added tables. Shown above the event type list when this category is selected. */
+  priceTables: PriceTable[];
   type: CategoryDisplayType;
 };
 
@@ -67,9 +69,12 @@ export type ThemeColors = {
   accent: string;
   headings: string;
   primaryButton: string;
+  primaryButtonText: string;
   secondaryButton: string;
+  secondaryButtonText: string;
   headerBg: string;
   heroBg: string;
+  heroCardBg: string;
   pageBg: string;
   sectionBg: string;
   footerBg: string;

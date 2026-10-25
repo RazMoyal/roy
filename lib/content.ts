@@ -5,7 +5,7 @@ import {
   defaultEventContent,
   getSeedEventTypes,
   isSlugFormat,
-  normalizePriceTable,
+  normalizePriceTables,
 } from "@/lib/event-types";
 import { SEED_CATEGORIES } from "@/lib/categories";
 import { DEFAULT_THEME, normalizeTheme } from "@/lib/theme";
@@ -70,11 +70,13 @@ function mergeWithDefaults(parsed: SiteContent): SiteContent {
   const events: Record<string, EventContent> = {};
   for (const [slug, event] of Object.entries(source)) {
     if (!isSlugFormat(slug)) continue;
+    const { priceTable: legacyPriceTable, priceTables, ...rest } =
+      (event ?? {}) as EventContent & { priceTable?: unknown };
     events[slug] = {
       ...defaultEventContent(event?.title || slug),
-      ...event,
+      ...rest,
       images: event?.images ?? [],
-      priceTable: normalizePriceTable(event?.priceTable),
+      priceTables: normalizePriceTables(priceTables, legacyPriceTable),
     };
   }
   // Categories are authoritative like events, but event type references are
@@ -83,12 +85,14 @@ function mergeWithDefaults(parsed: SiteContent): SiteContent {
   const categories: Record<string, EventCategory> = {};
   for (const [slug, category] of Object.entries(categorySource)) {
     if (!isSlugFormat(slug)) continue;
+    const { priceTable: legacyPriceTable, priceTables } =
+      (category ?? {}) as EventCategory & { priceTable?: unknown };
     categories[slug] = {
       title: category?.title || slug,
       eventTypeSlugs: (category?.eventTypeSlugs ?? []).filter(
         (s) => s in events,
       ),
-      priceTable: normalizePriceTable(category?.priceTable),
+      priceTables: normalizePriceTables(priceTables, legacyPriceTable),
       type: category?.type === "gallery" ? "gallery" : "regular",
     };
   }

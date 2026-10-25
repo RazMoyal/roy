@@ -1,4 +1,7 @@
+import { cookies } from "next/headers";
 import { AdminPanel } from "@/components/admin/AdminPanel";
+import { AdminLogin } from "@/components/admin/AdminLogin";
+import { SESSION_COOKIE, isValidSessionToken } from "@/lib/auth";
 
 export const instant = false;
 
@@ -7,10 +10,13 @@ export const metadata = {
   robots: { index: false, follow: false },
 };
 
-export default function AdminPage() {
+export default async function AdminPage() {
+  const cookieStore = await cookies();
+  const authed = isValidSessionToken(cookieStore.get(SESSION_COOKIE)?.value);
+
   return (
     <div className="min-h-screen bg-stone-100" dir="rtl">
-      <AdminPanel />
+      {authed ? <AdminPanel /> : <AdminLogin />}
     </div>
   );
 }

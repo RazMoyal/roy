@@ -5,6 +5,10 @@ type AboutSectionProps = {
 };
 
 export function AboutSection({ content }: AboutSectionProps) {
+  if (!content.aboutText?.trim()) {
+    return null;
+  }
+
   return (
     <section id="about" className="bg-section-bg py-14 sm:py-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">

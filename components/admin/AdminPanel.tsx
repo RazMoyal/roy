@@ -3,8 +3,9 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import type { EventCategory, EventContent, SiteContent } from "@/types/content";
-import { defaultEventContent } from "@/lib/event-types";
+import { HOME_HERO_SLUG, defaultEventContent } from "@/lib/event-types";
 import { HomeEditor } from "@/components/admin/HomeEditor";
 import { EventEditor } from "@/components/admin/EventEditor";
 import { PageLink } from "@/components/admin/PageLink";
@@ -16,6 +17,7 @@ import { CategoryEditor } from "@/components/admin/CategoryEditor";
 type Tab = "home" | string;
 
 export function AdminPanel() {
+  const router = useRouter();
   const [tab, setTab] = useState<Tab>("home");
   const [content, setContentState] = useState<SiteContent | null>(null);
   const [dirty, setDirty] = useState(false);
@@ -60,6 +62,11 @@ export function AdminPanel() {
     setDirty(false);
     setStatus("saved");
     setTimeout(() => setStatus("idle"), 2000);
+  }
+
+  async function logout() {
+    await fetch("/api/admin-logout", { method: "POST" });
+    router.refresh();
   }
 
   function setEvents(events: Record<string, EventContent>) {
@@ -161,6 +168,13 @@ export function AdminPanel() {
                 ? "נשמר ✓"
                 : "שמירה"}
           </button>
+          <button
+            type="button"
+            onClick={() => void logout()}
+            className="rounded-lg border border-stone-300 px-4 py-2 text-sm font-medium hover:bg-stone-50"
+          >
+            התנתקות
+          </button>
         </div>
       </header>
 
@@ -214,7 +228,10 @@ export function AdminPanel() {
                 {content.events[slug].title || slug}
               </button>
             ))}
-            <AddEventType existingSlugs={slugs} onAdd={addEventType} />
+            <AddEventType
+              existingSlugs={[...slugs, HOME_HERO_SLUG]}
+              onAdd={addEventType}
+            />
           </nav>
         </aside>
 
