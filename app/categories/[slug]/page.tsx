@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { GalleryGrid } from "@/components/gallery/GalleryGrid";
 import { EventPriceTable } from "@/components/events/EventPriceTable";
-import { readSiteContent } from "@/lib/content";
+import { readSiteContent, reconcileEventImages } from "@/lib/content";
 
 export const instant = false;
 
@@ -24,6 +24,18 @@ export default async function CategoryGalleryPage({ params }: PageProps) {
   const site = await readSiteContent();
   const category = site.categories[slug];
   if (!category || category.type !== "gallery") notFound();
+
+  const sections = await Promise.all(
+    category.eventTypeSlugs.map(async (eventSlug) => {
+      const event = site.events[eventSlug];
+      if (!event) return null;
+      return {
+        eventSlug,
+        title: event.title || eventSlug,
+        images: await reconcileEventImages(eventSlug, event.images),
+      };
+    }),
+  );
 
   return (
     <SiteShell>
@@ -47,17 +59,16 @@ export default async function CategoryGalleryPage({ params }: PageProps) {
           </div>
         )}
         <div className="space-y-14">
-          {category.eventTypeSlugs.map((eventSlug) => {
-            const event = site.events[eventSlug];
-            if (!event) return null;
-            const title = event.title || eventSlug;
+          {sections.map((section) => {
+            if (!section) return null;
+            const { eventSlug, title, images } = section;
             return (
               <section key={eventSlug}>
                 <h2 className="text-xl font-semibold sm:text-2xl text-heading">
                   {title}
                 </h2>
                 <div className="mt-6">
-                  <GalleryGrid images={event.images} title={title} />
+                  <GalleryGrid images={images} title={title} />
                 </div>
               </section>
             );

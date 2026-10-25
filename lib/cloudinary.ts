@@ -35,3 +35,37 @@ export async function uploadEventImage(
 export async function deleteEventImage(publicId: string): Promise<void> {
   await cloudinary.uploader.destroy(publicId);
 }
+
+export type CloudinaryImage = {
+  id: string;
+  url: string;
+  createdAt: string;
+};
+
+/** Every image actually sitting in an event type's Cloudinary folder — the source of truth for what exists. */
+export async function listEventImages(slug: string): Promise<CloudinaryImage[]> {
+  const images: CloudinaryImage[] = [];
+  let nextCursor: string | undefined;
+  do {
+    const result = await cloudinary.api.resources({
+      type: "upload",
+      resource_type: "image",
+      prefix: `${eventFolder(slug)}/`,
+      max_results: 500,
+      next_cursor: nextCursor,
+    });
+    for (const resource of result.resources as Array<{
+      public_id: string;
+      secure_url: string;
+      created_at: string;
+    }>) {
+      images.push({
+        id: resource.public_id,
+        url: resource.secure_url,
+        createdAt: resource.created_at,
+      });
+    }
+    nextCursor = result.next_cursor;
+  } while (nextCursor);
+  return images;
+}

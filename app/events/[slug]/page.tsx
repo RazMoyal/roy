@@ -4,7 +4,7 @@ import { EventPageHeader } from "@/components/events/EventPageHeader";
 import { WhatsAppContactButton } from "@/components/events/WhatsAppContactButton";
 import { EventPriceTable } from "@/components/events/EventPriceTable";
 import { GalleryGrid } from "@/components/gallery/GalleryGrid";
-import { listEventSlugs, readSiteContent } from "@/lib/content";
+import { listEventSlugs, readSiteContent, reconcileEventImages } from "@/lib/content";
 
 export const instant = false;
 
@@ -30,6 +30,7 @@ export default async function EventPage({ params }: PageProps) {
   const event = site.events[slug];
   if (!event) notFound();
   const title = event.title || slug;
+  const images = await reconcileEventImages(slug, event.images);
 
   return (
     <SiteShell>
@@ -56,7 +57,7 @@ export default async function EventPage({ params }: PageProps) {
             תמונות מהאירוע
           </h2>
           <div className="mt-6">
-            <GalleryGrid images={event?.images ?? []} title={title} />
+            <GalleryGrid images={images} title={title} />
           </div>
           <WhatsAppContactButton phone={site.home.whatsappPhone} eventTitle={title} />
         </div>

@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { WhatsAppContactButton } from "@/components/events/WhatsAppContactButton";
 import { GalleryGrid } from "@/components/gallery/GalleryGrid";
-import { listEventSlugs, readSiteContent } from "@/lib/content";
+import { listEventSlugs, readSiteContent, reconcileEventImages } from "@/lib/content";
 
 export const instant = false;
 
@@ -29,6 +29,7 @@ export default async function EventGalleryPage({ params }: PageProps) {
   const event = site.events[slug];
   if (!event) notFound();
   const title = event.title || slug;
+  const images = await reconcileEventImages(slug, event.images);
 
   return (
     <SiteShell>
@@ -49,7 +50,7 @@ export default async function EventGalleryPage({ params }: PageProps) {
         </div>
       </div>
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
-        <GalleryGrid images={event?.images ?? []} title={title} />
+        <GalleryGrid images={images} title={title} />
         <WhatsAppContactButton phone={site.home.whatsappPhone} eventTitle={title} />
       </div>
     </SiteShell>

@@ -1,7 +1,6 @@
-import { promises as fs } from "fs";
-import path from "path";
+import { getStore } from "@netlify/blobs";
 import { unstable_noStore as noStore } from "next/cache";
-import type { EventCategory, EventContent, SiteContent } from "@/types/content";
+import type { EventCategory, EventContent, GalleryImage, SiteContent } from "@/types/content";
 import {
   defaultEventContent,
   getSeedEventTypes,
@@ -10,8 +9,26 @@ import {
 } from "@/lib/event-types";
 import { SEED_CATEGORIES } from "@/lib/categories";
 import { DEFAULT_THEME, normalizeTheme } from "@/lib/theme";
+import { listEventImages } from "@/lib/cloudinary";
 
-const CONTENT_PATH = path.join(process.cwd(), "data", "site-content.json");
+const CONTENT_KEY = "site-content.json";
+
+/**
+ * The site's content lives in Netlify Blobs, not on the local disk — Netlify
+ * Functions run on a read-only, per-invocation filesystem, so a plain JSON
+ * file on disk can't survive a write there. Blobs give local dev and the
+ * deployed site the same persistent store. Netlify injects store access
+ * automatically during its own Build/Functions/Edge runtime; BLOBS_SITE_ID +
+ * BLOBS_TOKEN let `next dev`/`next build` running on a developer's machine
+ * reach that same remote store explicitly.
+ */
+function contentStore() {
+  const siteID = process.env.BLOBS_SITE_ID;
+  const token = process.env.BLOBS_TOKEN;
+  return siteID && token
+    ? getStore({ name: "site-content", siteID, token })
+    : getStore("site-content");
+}
 
 function createDefaultContent(): SiteContent {
   const events: Record<string, EventContent> = {};
@@ -36,19 +53,6 @@ function createDefaultContent(): SiteContent {
     events,
     categories: structuredClone(SEED_CATEGORIES),
   };
-}
-
-async function ensureContentFile(): Promise<void> {
-  try {
-    await fs.access(CONTENT_PATH);
-  } catch {
-    await fs.mkdir(path.dirname(CONTENT_PATH), { recursive: true });
-    await fs.writeFile(
-      CONTENT_PATH,
-      JSON.stringify(createDefaultContent(), null, 2),
-      "utf-8",
-    );
-  }
 }
 
 function mergeWithDefaults(parsed: SiteContent): SiteContent {
@@ -91,15 +95,13 @@ function mergeWithDefaults(parsed: SiteContent): SiteContent {
 
 export async function readSiteContent(): Promise<SiteContent> {
   noStore();
-  await ensureContentFile();
-  const raw = await fs.readFile(CONTENT_PATH, "utf-8");
-  const parsed = JSON.parse(raw) as SiteContent;
+  const stored = await contentStore().get(CONTENT_KEY, { type: "json" });
+  const parsed = (stored ?? createDefaultContent()) as SiteContent;
   return mergeWithDefaults(parsed);
 }
 
 export async function writeSiteContent(content: SiteContent): Promise<void> {
-  await fs.mkdir(path.dirname(CONTENT_PATH), { recursive: true });
-  await fs.writeFile(CONTENT_PATH, JSON.stringify(content, null, 2), "utf-8");
+  await contentStore().setJSON(CONTENT_KEY, content);
 }
 
 export async function getEventContent(slug: string): Promise<EventContent | null> {
@@ -108,13 +110,60 @@ export async function getEventContent(slug: string): Promise<EventContent | null
 }
 
 /**
- * Event slugs for generateStaticParams. Reads the file directly (no noStore),
- * since it runs at build time; types added later render on demand.
+ * Cloudinary's folder for the event type is the source of truth for which
+ * images exist — `stored` only supplies the admin's manual order preference.
+ * An image deleted directly in Cloudinary drops out here even if a stale
+ * entry lingers in `stored`; one uploaded outside the admin flow shows up
+ * automatically. Falls back to `stored` as-is if Cloudinary can't be reached,
+ * so a transient API error doesn't blank out a gallery.
  */
+export async function reconcileEventImages(
+  slug: string,
+  stored: GalleryImage[],
+): Promise<GalleryImage[]> {
+  let cloud;
+  try {
+    cloud = await listEventImages(slug);
+  } catch {
+    return stored;
+  }
+
+  const cloudById = new Map(cloud.map((image) => [image.id, image]));
+  const kept = [...stored]
+    .filter((image) => cloudById.has(image.id))
+    .sort((a, b) => a.order - b.order);
+  const keptIds = new Set(kept.map((image) => image.id));
+
+  const added = cloud
+    .filter((image) => !keptIds.has(image.id))
+    .sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+
+  return [...kept, ...added].map((image, index) => ({
+    id: image.id,
+    url: cloudById.get(image.id)?.url ?? image.url,
+    order: index,
+  }));
+}
+
+/** Reconciles every event type's images against Cloudinary in parallel. */
+export async function reconcileAllEventImages(
+  events: Record<string, EventContent>,
+): Promise<Record<string, EventContent>> {
+  const entries = await Promise.all(
+    Object.entries(events).map(async ([slug, event]) => [
+      slug,
+      { ...event, images: await reconcileEventImages(slug, event.images) },
+    ] as const),
+  );
+  return Object.fromEntries(entries);
+}
+
+/** Event slugs for generateStaticParams; types added later still render on demand. */
 export async function listEventSlugs(): Promise<string[]> {
   try {
-    const parsed = JSON.parse(await fs.readFile(CONTENT_PATH, "utf-8"));
-    return Object.keys(parsed.events ?? {}).filter(isSlugFormat);
+    const stored = await contentStore().get(CONTENT_KEY, { type: "json" });
+    const events = (stored as SiteContent | null)?.events ?? {};
+    return Object.keys(events).filter(isSlugFormat);
   } catch {
     return Object.keys(getSeedEventTypes());
   }
