@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import type { GalleryImage } from "@/types/content";
 import { Lightbox } from "@/components/gallery/Lightbox";
+import { SiteImage } from "@/components/common/SiteImage";
 
 type GalleryGridProps = {
   images: GalleryImage[];
@@ -33,7 +33,7 @@ export function GalleryGrid({ images, title }: GalleryGridProps) {
             className="group relative aspect-[4/3] cursor-zoom-in overflow-hidden rounded-lg bg-stone-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600 sm:rounded-xl"
             aria-label={`הגדלת תמונה ${index + 1} מתוך ${sorted.length}`}
           >
-            <Image
+            <SiteImage
               src={image.url}
               alt={`${title} — תמונה ${index + 1}`}
               fill
@@ -41,6 +41,7 @@ export function GalleryGrid({ images, title }: GalleryGridProps) {
               sizes="(max-width: 1024px) 50vw, 33vw"
               // First row is above the fold (and usually the LCP), so skip lazy loading.
               loading={index < 3 ? "eager" : "lazy"}
+              quality="auto:eco"
             />
           </button>
         ))}

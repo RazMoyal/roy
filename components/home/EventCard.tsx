@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import { SiteImage } from "@/components/common/SiteImage";
 
 type EventCardProps = {
   slug: string;
@@ -21,12 +21,14 @@ export function EventCard({
     >
       {coverUrl && (
         <div className="relative aspect-[16/10] bg-stone-200">
-          <Image
+          <SiteImage
             src={coverUrl}
             alt={labelHe}
             fill
             className="object-cover transition group-hover:scale-[1.02]"
             sizes="(max-width: 768px) 100vw, 33vw"
+            loading="lazy"
+            quality="auto:eco"
           />
         </div>
       )}

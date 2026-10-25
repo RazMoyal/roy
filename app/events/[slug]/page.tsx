@@ -34,22 +34,32 @@ export default async function EventPage({ params }: PageProps) {
   return (
     <SiteShell>
       <EventPageHeader title={title} />
-      <article className="mx-auto max-w-6xl px-4 pt-4 pb-12 sm:px-6 sm:pt-6">
-        <p className="max-w-3xl text-base leading-relaxed sm:text-lg text-stone-600">
-          {event?.description}
-        </p>
-        {event.priceTable && event.priceTable.rows.length > 0 && (
+      <article className="pt-4 pb-12 sm:pt-6">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <p className="max-w-3xl text-base leading-relaxed sm:text-lg text-stone-600">
+            {event?.description}
+          </p>
+          {event.priceTable && event.priceTable.rows.length > 0 && (
+            <div className="mt-10 sm:mt-12">
+              <EventPriceTable priceTable={event.priceTable} />
+            </div>
+          )}
+        </div>
+        {event.bannerUrl && (
           <div className="mt-10 sm:mt-12">
-            <EventPriceTable priceTable={event.priceTable} />
+            {/* eslint-disable-next-line @next/next/no-img-element -- full-bleed, dimensions unknown at upload time */}
+            <img src={event.bannerUrl} alt="" className="block h-auto w-full" />
           </div>
         )}
-        <h2 className="mt-10 text-xl font-semibold sm:mt-12 sm:text-2xl text-heading">
-          תמונות מהאירוע
-        </h2>
-        <div className="mt-6">
-          <GalleryGrid images={event?.images ?? []} title={title} />
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <h2 className="mt-10 text-xl font-semibold sm:mt-12 sm:text-2xl text-heading">
+            תמונות מהאירוע
+          </h2>
+          <div className="mt-6">
+            <GalleryGrid images={event?.images ?? []} title={title} />
+          </div>
+          <WhatsAppContactButton phone={site.home.whatsappPhone} eventTitle={title} />
         </div>
-        <WhatsAppContactButton phone={site.home.whatsappPhone} eventTitle={title} />
       </article>
     </SiteShell>
   );

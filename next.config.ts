@@ -4,6 +4,9 @@ const nextConfig: NextConfig = {
   // Lets phones on the home network (http://192.168.x.x:3000) load the dev
   // server's scripts; without it the page shows but nothing is clickable.
   allowedDevOrigins: ["192.168.*.*"],
+  images: {
+    remotePatterns: [{ protocol: "https", hostname: "res.cloudinary.com" }],
+  },
   experimental: {
     agentFeedback: true,
   },

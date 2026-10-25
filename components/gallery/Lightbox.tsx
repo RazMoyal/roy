@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
 import type { GalleryImage } from "@/types/content";
+import { SiteImage } from "@/components/common/SiteImage";
 
 type LightboxProps = {
   images: GalleryImage[];
@@ -85,7 +85,7 @@ export function Lightbox({
         onTouchEnd={handleTouchEnd}
       >
         <div className="relative h-[80dvh] w-[94vw] sm:h-[86dvh] sm:w-[86vw]">
-          <Image
+          <SiteImage
             key={image.id}
             src={image.url}
             alt={`${title} — תמונה ${index + 1}`}
@@ -122,7 +122,7 @@ export function Lightbox({
               className={`${navButton} right-2 sm:right-5`}
               aria-label="התמונה הקודמת"
             >
-              ›
+              ‹
             </button>
             <button
               type="button"
@@ -130,7 +130,7 @@ export function Lightbox({
               className={`${navButton} left-2 sm:left-5`}
               aria-label="התמונה הבאה"
             >
-              ‹
+              ›
             </button>
           </>
         )}

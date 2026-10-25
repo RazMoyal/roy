@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import type { GalleryImage } from "@/types/content";
+import { SiteImage } from "@/components/common/SiteImage";
 
 type CoverImageEditorProps = {
   slug: string;
@@ -73,7 +73,7 @@ export function CoverImageEditor({
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
         <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden rounded-xl bg-stone-100 sm:w-64">
           {shownUrl ? (
-            <Image src={shownUrl} alt="" fill className="object-cover" />
+            <SiteImage src={shownUrl} alt="" fill className="object-cover" quality="auto:eco" />
           ) : (
             <span className="flex h-full items-center justify-center text-xs text-stone-500">
               אין תמונה
@@ -131,7 +131,14 @@ export function CoverImageEditor({
                     }`}
                     aria-label="בחירה כתמונה ראשית"
                   >
-                    <Image src={image.url} alt="" fill className="object-cover" />
+                    <SiteImage
+                      src={image.url}
+                      alt=""
+                      fill
+                      className="object-cover"
+                      loading="lazy"
+                      quality="auto:eco"
+                    />
                   </button>
                 </li>
               );

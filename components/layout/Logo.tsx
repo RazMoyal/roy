@@ -17,7 +17,6 @@ export function Logo({ compact }: LogoProps) {
         width={compact ? 120 : 160}
         height={48}
         className="h-10 w-auto object-contain sm:h-11"
-        preload
       />
     </Link>
   );

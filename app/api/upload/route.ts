@@ -1,17 +1,10 @@
 import { NextResponse } from "next/server";
-import { promises as fs } from "fs";
-import path from "path";
-import { randomUUID } from "crypto";
 import { isSlugFormat } from "@/lib/event-types";
-
-// Some mobile browsers (notably for HEIC camera photos, or certain gallery
-// pickers) send an empty or generic file.type, so the MIME check alone is
-// unreliable — fall back to the file extension.
-const IMAGE_EXTENSION = /\.(jpe?g|png|gif|webp|avif|heic|heif|bmp|svg)$/i;
-
-function looksLikeImage(file: File): boolean {
-  return file.type.startsWith("image/") || IMAGE_EXTENSION.test(file.name);
-}
+import {
+  deleteEventImage,
+  eventFolder,
+  uploadEventImage,
+} from "@/lib/cloudinary";
 
 export async function POST(request: Request) {
   const formData = await request.formData();
@@ -26,21 +19,31 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "No file provided" }, { status: 400 });
   }
 
-  if (!looksLikeImage(file)) {
+  const buffer = Buffer.from(await file.arrayBuffer());
+
+  // No MIME/extension allowlist here — some mobile browsers send an empty or
+  // generic file.type (notably for HEIC), and a hand-maintained extension
+  // list would always lag behind the formats people actually use. Cloudinary
+  // itself validates the content against resource_type: "image" and rejects
+  // anything that isn't a real image, so it's the single source of truth.
+  try {
+    const { publicId, url } = await uploadEventImage(buffer, slug);
+    return NextResponse.json({ id: publicId, url });
+  } catch {
     return NextResponse.json({ error: "File must be an image" }, { status: 400 });
   }
+}
 
-  const ext = path.extname(file.name) || ".jpg";
-  const id = randomUUID();
-  const filename = `${id}${ext}`;
-  const uploadDir = path.join(process.cwd(), "public", "uploads", slug);
-  await fs.mkdir(uploadDir, { recursive: true });
-
-  const buffer = Buffer.from(await file.arrayBuffer());
-  await fs.writeFile(path.join(uploadDir, filename), buffer);
-
-  const url = `/uploads/${slug}/${filename}`;
-  return NextResponse.json({ id, url });
+/**
+ * Recovers the Cloudinary public_id from a delivery URL, e.g.
+ * https://res.cloudinary.com/<cloud>/image/upload/v169.../roy-events/slug/abc123.jpg
+ * -> roy-events/slug/abc123
+ */
+function publicIdFromUrl(url: string): string | null {
+  const match = url.match(
+    /\/upload\/(?:[a-z]+_[^/]+\/)*(?:v\d+\/)?(.+)\.[a-zA-Z0-9]+$/,
+  );
+  return match ? match[1] : null;
 }
 
 export async function DELETE(request: Request) {
@@ -49,16 +52,17 @@ export async function DELETE(request: Request) {
     url: string;
   };
 
-  if (!isSlugFormat(slug) || !url.startsWith(`/uploads/${slug}/`)) {
+  if (!isSlugFormat(slug)) {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
 
-  const filePath = path.join(process.cwd(), "public", url.replace(/^\//, ""));
-  try {
-    await fs.unlink(filePath);
-  } catch {
-    /* file may already be removed */
+  const publicId = publicIdFromUrl(url);
+  if (!publicId || !publicId.startsWith(`${eventFolder(slug)}/`)) {
+    // Not a Cloudinary asset we own (e.g. one of the original local seed
+    // images) — nothing to delete on our end.
+    return NextResponse.json({ ok: true });
   }
 
+  await deleteEventImage(publicId);
   return NextResponse.json({ ok: true });
 }

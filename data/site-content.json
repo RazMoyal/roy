@@ -34,94 +34,89 @@
       "description": "גלריית תמונות ופרטים לאירועי בריתה באולם רוי.",
       "images": [
         {
-          "id": "seed-brita-1",
-          "url": "/uploads/DSC0093449-1-1024x683.jpg",
-          "order": 0
-        },
-        {
-          "id": "seed-brita-2",
-          "url": "/uploads/DSC01014-1024x683.jpg",
+          "id": "roy-events/brita/g0jrmvyki878lpt48qh1",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926679/roy-events/brita/g0jrmvyki878lpt48qh1.jpg",
           "order": 1
         },
         {
-          "id": "seed-brita-3",
-          "url": "/uploads/DSC01338-1024x683.jpg",
+          "id": "roy-events/brita/nvdmdh5ufl4ugbbdvxck",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926679/roy-events/brita/nvdmdh5ufl4ugbbdvxck.jpg",
           "order": 2
+        },
+        {
+          "id": "roy-events/brita/i3htooxbdfld6mr43jke",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926680/roy-events/brita/i3htooxbdfld6mr43jke.jpg",
+          "order": 3
+        },
+        {
+          "id": "roy-events/brita/qzsvn6ybjpaoeaasvrik",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792929285/roy-events/brita/qzsvn6ybjpaoeaasvrik.png",
+          "order": 4
         }
-      ]
+      ],
+      "coverUrl": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792929285/roy-events/brita/qzsvn6ybjpaoeaasvrik.png"
     },
     "brit": {
       "title": "ברית",
       "description": "גלריית תמונות ופרטים לאירועי ברית באולם רוי.",
       "images": [
         {
-          "id": "seed-brit-3",
-          "url": "/uploads/DSC01253-1024x683.jpg",
+          "id": "roy-events/brit/k25tjtsrl3rqjknpill9",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926681/roy-events/brit/k25tjtsrl3rqjknpill9.jpg",
           "order": 0
         },
         {
-          "id": "seed-brit-1",
-          "url": "/uploads/DS45C00949-1-1024x683.jpg",
+          "id": "roy-events/brit/suq20yor1lslphfxoox6",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926682/roy-events/brit/suq20yor1lslphfxoox6.jpg",
           "order": 1
         },
         {
-          "id": "seed-brit-2",
-          "url": "/uploads/DSC0098749-1-1024x683.jpg",
+          "id": "roy-events/brit/msyxwublh8cxcoiem7nc",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926683/roy-events/brit/msyxwublh8cxcoiem7nc.jpg",
           "order": 2
         }
       ],
-      "coverUrl": "/uploads/DS45C00949-1-1024x683.jpg",
-      "priceTable": {
-        "title": "מחירון",
-        "note": "",
-        "rows": [
-          {
-            "id": "013c31c9-dea5-4e35-9a98-5a0911853944",
-            "label": "",
-            "price": ""
-          }
-        ]
-      }
+      "coverUrl": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926682/roy-events/brit/suq20yor1lslphfxoox6.jpg"
     },
     "bar-mitzvah": {
       "title": "בר מצווה",
       "description": "גלריית תמונות ופרטים לאירועי בר מצווה באולם רוי.",
       "images": [
         {
-          "id": "seed-bar-mitzvah-1",
-          "url": "/uploads/DSC00949-1024x683.jpg",
+          "id": "roy-events/bar-mitzvah/sezkd4duw3teggjmcx67",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926683/roy-events/bar-mitzvah/sezkd4duw3teggjmcx67.jpg",
           "order": 0
         },
         {
-          "id": "seed-bar-mitzvah-2",
-          "url": "/uploads/DSC01167-1024x683.jpg",
+          "id": "roy-events/bar-mitzvah/xngezrn3zvvu7qqdg7ic",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926684/roy-events/bar-mitzvah/xngezrn3zvvu7qqdg7ic.jpg",
           "order": 1
         },
         {
-          "id": "seed-bar-mitzvah-3",
-          "url": "/uploads/DSC01353-1024x683.jpg",
+          "id": "roy-events/bar-mitzvah/n57fwroj5mdb8di8cmoc",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926685/roy-events/bar-mitzvah/n57fwroj5mdb8di8cmoc.jpg",
           "order": 2
         }
       ],
-      "coverUrl": "/uploads/DSC01167-1024x683.jpg"
+      "coverUrl": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926684/roy-events/bar-mitzvah/xngezrn3zvvu7qqdg7ic.jpg"
     },
     "aliyah-latorah": {
       "title": "עלייה לתורה",
       "description": "גלריית תמונות ופרטים לאירועי עלייה לתורה באולם רוי.",
       "images": [
         {
-          "id": "seed-aliyah-latorah-1",
-          "url": "/uploads/DSC00954-1024x683.jpg",
+          "id": "roy-events/aliyah-latorah/nfffixc27py2i7ejnvta",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926685/roy-events/aliyah-latorah/nfffixc27py2i7ejnvta.jpg",
           "order": 0
         },
         {
-          "id": "seed-aliyah-latorah-2",
-          "url": "/uploads/DSC01197-1024x683.jpg",
+          "id": "roy-events/aliyah-latorah/kdenvhalrxyamm251oit",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926686/roy-events/aliyah-latorah/kdenvhalrxyamm251oit.jpg",
           "order": 1
         },
         {
-          "id": "seed-aliyah-latorah-3",
-          "url": "/uploads/DSC01382.jpg",
+          "id": "roy-events/aliyah-latorah/cbwbf1mofikwpf8ouqzm",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926686/roy-events/aliyah-latorah/cbwbf1mofikwpf8ouqzm.jpg",
           "order": 2
         }
       ]
@@ -131,18 +126,18 @@
       "description": "גלריית תמונות ופרטים לאירועי בת מצווה באולם רוי.",
       "images": [
         {
-          "id": "seed-bat-mitzvah-1",
-          "url": "/uploads/DSC0095649-1-1024x683.jpg",
+          "id": "roy-events/bat-mitzvah/scq2djhq93yxq4rtefys",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926687/roy-events/bat-mitzvah/scq2djhq93yxq4rtefys.jpg",
           "order": 0
         },
         {
-          "id": "seed-bat-mitzvah-2",
-          "url": "/uploads/DSC01253-1024x683.jpg",
+          "id": "roy-events/bat-mitzvah/alr2ohp06w2fca7tis8w",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926688/roy-events/bat-mitzvah/alr2ohp06w2fca7tis8w.jpg",
           "order": 1
         },
         {
-          "id": "seed-bat-mitzvah-3",
-          "url": "/uploads/DS45C00949-1-1024x683.jpg",
+          "id": "roy-events/bat-mitzvah/v0g1chsyidgsv1yljyes",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926688/roy-events/bat-mitzvah/v0g1chsyidgsv1yljyes.jpg",
           "order": 2
         }
       ]
@@ -152,18 +147,18 @@
       "description": "גלריית תמונות ופרטים לאירועי חינה באולם רוי.",
       "images": [
         {
-          "id": "seed-china-1",
-          "url": "/uploads/DSC0098749-1-1024x683.jpg",
+          "id": "roy-events/china/m6ngrt0ibjw7xdidgrxf",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926689/roy-events/china/m6ngrt0ibjw7xdidgrxf.jpg",
           "order": 0
         },
         {
-          "id": "seed-china-2",
-          "url": "/uploads/DSC01338-1024x683.jpg",
+          "id": "roy-events/china/h9cpxkoriv3jxmxs82ln",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926689/roy-events/china/h9cpxkoriv3jxmxs82ln.jpg",
           "order": 1
         },
         {
-          "id": "seed-china-3",
-          "url": "/uploads/DSC0093449-1-1024x683.jpg",
+          "id": "roy-events/china/h1kybh9vzsoh4ru3rw5c",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926690/roy-events/china/h1kybh9vzsoh4ru3rw5c.jpg",
           "order": 2
         }
       ]
@@ -173,18 +168,18 @@
       "description": "גלריית תמונות ופרטים לאירועי חתונה באולם רוי.",
       "images": [
         {
-          "id": "seed-wedding-1",
-          "url": "/uploads/DSC01014-1024x683.jpg",
+          "id": "roy-events/wedding/ljieajnwivfpm2nocvpb",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926690/roy-events/wedding/ljieajnwivfpm2nocvpb.jpg",
           "order": 0
         },
         {
-          "id": "seed-wedding-2",
-          "url": "/uploads/DSC01353-1024x683.jpg",
+          "id": "roy-events/wedding/o2mbyevr2rufdwqznuiy",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926691/roy-events/wedding/o2mbyevr2rufdwqznuiy.jpg",
           "order": 1
         },
         {
-          "id": "seed-wedding-3",
-          "url": "/uploads/DSC00949-1024x683.jpg",
+          "id": "roy-events/wedding/kyoeydi3nb3gftbfbjsm",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926691/roy-events/wedding/kyoeydi3nb3gftbfbjsm.jpg",
           "order": 2
         }
       ]
@@ -194,18 +189,18 @@
       "description": "גלריית תמונות ופרטים לאירועי הפרשת חלה מקווה באולם רוי.",
       "images": [
         {
-          "id": "seed-challah-separation-1",
-          "url": "/uploads/DSC01167-1024x683.jpg",
+          "id": "roy-events/challah-separation/p7loqupjjzi9y1z1f4tf",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926692/roy-events/challah-separation/p7loqupjjzi9y1z1f4tf.jpg",
           "order": 0
         },
         {
-          "id": "seed-challah-separation-2",
-          "url": "/uploads/DSC01382.jpg",
+          "id": "roy-events/challah-separation/wb93wb3grivx7tqyrifa",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926693/roy-events/challah-separation/wb93wb3grivx7tqyrifa.jpg",
           "order": 1
         },
         {
-          "id": "seed-challah-separation-3",
-          "url": "/uploads/DSC00954-1024x683.jpg",
+          "id": "roy-events/challah-separation/ndoe4zw6dzq4v4xsg6z0",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926693/roy-events/challah-separation/ndoe4zw6dzq4v4xsg6z0.jpg",
           "order": 2
         }
       ]
@@ -215,18 +210,18 @@
       "description": "גלריית תמונות ופרטים לאירועי השכרת מתחם באולם רוי.",
       "images": [
         {
-          "id": "seed-venue-rental-1",
-          "url": "/uploads/DSC01197-1024x683.jpg",
+          "id": "roy-events/venue-rental/xr2m2ngxgsiv0hlaqtqc",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926694/roy-events/venue-rental/xr2m2ngxgsiv0hlaqtqc.jpg",
           "order": 0
         },
         {
-          "id": "seed-venue-rental-2",
-          "url": "/uploads/DS45C00949-1-1024x683.jpg",
+          "id": "roy-events/venue-rental/zepfgjlln4bmvhtt4tqt",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926695/roy-events/venue-rental/zepfgjlln4bmvhtt4tqt.jpg",
           "order": 1
         },
         {
-          "id": "seed-venue-rental-3",
-          "url": "/uploads/DSC0095649-1-1024x683.jpg",
+          "id": "roy-events/venue-rental/i5hd3k7wrfuikevlheps",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926695/roy-events/venue-rental/i5hd3k7wrfuikevlheps.jpg",
           "order": 2
         }
       ],
@@ -255,18 +250,18 @@
       "description": "גלריית תמונות ופרטים לאירועי אירועי חברה באולם רוי.",
       "images": [
         {
-          "id": "seed-corporate-events-1",
-          "url": "/uploads/DSC01253-1024x683.jpg",
+          "id": "roy-events/corporate-events/by2qfr1yoiuoahvvvltx",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926696/roy-events/corporate-events/by2qfr1yoiuoahvvvltx.jpg",
           "order": 0
         },
         {
-          "id": "seed-corporate-events-2",
-          "url": "/uploads/DSC0093449-1-1024x683.jpg",
+          "id": "roy-events/corporate-events/xyfztsxyesdj5kseysqp",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926697/roy-events/corporate-events/xyfztsxyesdj5kseysqp.jpg",
           "order": 1
         },
         {
-          "id": "seed-corporate-events-3",
-          "url": "/uploads/DSC0098749-1-1024x683.jpg",
+          "id": "roy-events/corporate-events/wpfbufmnaoh5x0slmgey",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926697/roy-events/corporate-events/wpfbufmnaoh5x0slmgey.jpg",
           "order": 2
         }
       ]
@@ -276,18 +271,18 @@
       "description": "גלריית תמונות ופרטים לאירועי כנס באולם רוי.",
       "images": [
         {
-          "id": "seed-conference-1",
-          "url": "/uploads/DSC01338-1024x683.jpg",
+          "id": "roy-events/conference/q4x4npawnwhblndk9lpw",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926698/roy-events/conference/q4x4npawnwhblndk9lpw.jpg",
           "order": 0
         },
         {
-          "id": "seed-conference-2",
-          "url": "/uploads/DSC00949-1024x683.jpg",
+          "id": "roy-events/conference/lhmjxgip6kjaao4vpphg",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926698/roy-events/conference/lhmjxgip6kjaao4vpphg.jpg",
           "order": 1
         },
         {
-          "id": "seed-conference-3",
-          "url": "/uploads/DSC01014-1024x683.jpg",
+          "id": "roy-events/conference/sofrbqovmaay9hbi0cu3",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926699/roy-events/conference/sofrbqovmaay9hbi0cu3.jpg",
           "order": 2
         }
       ]
@@ -297,18 +292,18 @@
       "description": "גלריית תמונות ופרטים לאירועי הרמת כוסית באולם רוי.",
       "images": [
         {
-          "id": "seed-toast-1",
-          "url": "/uploads/DSC01353-1024x683.jpg",
+          "id": "roy-events/toast/j4fp8vlsw97cq0zvzlmj",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926699/roy-events/toast/j4fp8vlsw97cq0zvzlmj.jpg",
           "order": 0
         },
         {
-          "id": "seed-toast-2",
-          "url": "/uploads/DSC00954-1024x683.jpg",
+          "id": "roy-events/toast/uujxp9cyfoc2b3imdcfj",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926700/roy-events/toast/uujxp9cyfoc2b3imdcfj.jpg",
           "order": 1
         },
         {
-          "id": "seed-toast-3",
-          "url": "/uploads/DSC01167-1024x683.jpg",
+          "id": "roy-events/toast/gdbujopsllsznd936nk8",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926701/roy-events/toast/gdbujopsllsznd936nk8.jpg",
           "order": 2
         }
       ]
@@ -318,18 +313,18 @@
       "description": "גלריית תמונות ופרטים לאירועי נשף באולם רוי.",
       "images": [
         {
-          "id": "seed-prom-1",
-          "url": "/uploads/DSC01382.jpg",
+          "id": "roy-events/prom/vezljfiz1kpvgo0wgzfs",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926701/roy-events/prom/vezljfiz1kpvgo0wgzfs.jpg",
           "order": 0
         },
         {
-          "id": "seed-prom-2",
-          "url": "/uploads/DSC0095649-1-1024x683.jpg",
+          "id": "roy-events/prom/pqsberj7ko4ytrs0uvyn",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926702/roy-events/prom/pqsberj7ko4ytrs0uvyn.jpg",
           "order": 1
         },
         {
-          "id": "seed-prom-3",
-          "url": "/uploads/DSC01197-1024x683.jpg",
+          "id": "roy-events/prom/bfrtj060bpzorv6d2wfu",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926702/roy-events/prom/bfrtj060bpzorv6d2wfu.jpg",
           "order": 2
         }
       ]
@@ -339,18 +334,18 @@
       "description": "גלריית תמונות ופרטים לאירועי אירוע חברה קונספט באולם רוי.",
       "images": [
         {
-          "id": "seed-corporate-concept-1",
-          "url": "/uploads/DS45C00949-1-1024x683.jpg",
+          "id": "roy-events/corporate-concept/ml5orsgw9qep0f6gcvb3",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926703/roy-events/corporate-concept/ml5orsgw9qep0f6gcvb3.jpg",
           "order": 0
         },
         {
-          "id": "seed-corporate-concept-2",
-          "url": "/uploads/DSC0098749-1-1024x683.jpg",
+          "id": "roy-events/corporate-concept/pepag1gim3x7fikpcbeh",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926703/roy-events/corporate-concept/pepag1gim3x7fikpcbeh.jpg",
           "order": 1
         },
         {
-          "id": "seed-corporate-concept-3",
-          "url": "/uploads/DSC01253-1024x683.jpg",
+          "id": "roy-events/corporate-concept/zqpwr9zas6d9daqsluou",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926704/roy-events/corporate-concept/zqpwr9zas6d9daqsluou.jpg",
           "order": 2
         }
       ]
@@ -360,18 +355,18 @@
       "description": "גלריית תמונות ופרטים לאירועי ארוחת ערב באולם רוי.",
       "images": [
         {
-          "id": "seed-dinner-1",
-          "url": "/uploads/DSC0093449-1-1024x683.jpg",
+          "id": "roy-events/dinner/vch7hm1ec2upbmzyvfta",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926705/roy-events/dinner/vch7hm1ec2upbmzyvfta.jpg",
           "order": 0
         },
         {
-          "id": "seed-dinner-2",
-          "url": "/uploads/DSC01014-1024x683.jpg",
+          "id": "roy-events/dinner/mx4qgjdturc2vup9mhp2",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926706/roy-events/dinner/mx4qgjdturc2vup9mhp2.jpg",
           "order": 1
         },
         {
-          "id": "seed-dinner-3",
-          "url": "/uploads/DSC01338-1024x683.jpg",
+          "id": "roy-events/dinner/rficddwzgksvpk3myd9y",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926707/roy-events/dinner/rficddwzgksvpk3myd9y.jpg",
           "order": 2
         }
       ]
@@ -381,18 +376,18 @@
       "description": "גלריית תמונות ופרטים לאירועי בוקר יום עיון באולם רוי.",
       "images": [
         {
-          "id": "seed-morning-seminar-1",
-          "url": "/uploads/DSC00949-1024x683.jpg",
+          "id": "roy-events/morning-seminar/d3o2xoczbxrwj9z0rleg",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926707/roy-events/morning-seminar/d3o2xoczbxrwj9z0rleg.jpg",
           "order": 0
         },
         {
-          "id": "seed-morning-seminar-2",
-          "url": "/uploads/DSC01167-1024x683.jpg",
+          "id": "roy-events/morning-seminar/cvhonyfkwktcr84qrxbb",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926708/roy-events/morning-seminar/cvhonyfkwktcr84qrxbb.jpg",
           "order": 1
         },
         {
-          "id": "seed-morning-seminar-3",
-          "url": "/uploads/DSC01353-1024x683.jpg",
+          "id": "roy-events/morning-seminar/ppaprxo5uppunw3g1hnt",
+          "url": "https://res.cloudinary.com/uezwgdbu/image/upload/v1792926709/roy-events/morning-seminar/ppaprxo5uppunw3g1hnt.jpg",
           "order": 2
         }
       ]

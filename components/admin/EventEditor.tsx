@@ -4,6 +4,7 @@ import type { EventContent } from "@/types/content";
 import { ImageManager } from "@/components/admin/ImageManager";
 import { CoverImageEditor } from "@/components/admin/CoverImageEditor";
 import { PriceTableEditor } from "@/components/admin/PriceTableEditor";
+import { BannerImageEditor } from "@/components/admin/BannerImageEditor";
 
 type EventEditorProps = {
   slug: string;
@@ -38,6 +39,16 @@ export function EventEditor({ slug, event, onChange }: EventEditorProps) {
         <PriceTableEditor
           priceTable={event.priceTable}
           onChange={(priceTable) => onChange({ ...event, priceTable })}
+        />
+      </div>
+      <div>
+        <h3 className="mb-3 text-sm font-semibold text-stone-800">
+          תמונה רחבה מתחת לטבלת המחירים (אופציונלי, בעמוד סוג האירוע)
+        </h3>
+        <BannerImageEditor
+          slug={slug}
+          bannerUrl={event.bannerUrl}
+          onChange={(bannerUrl) => onChange({ ...event, bannerUrl })}
         />
       </div>
       <div>

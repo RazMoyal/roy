@@ -29,6 +29,8 @@ export type EventContent = {
   images: GalleryImage[];
   /** Not every event type has one — only present when the admin added it. */
   priceTable?: PriceTable;
+  /** Optional full-width image shown below the price table on the event type page. */
+  bannerUrl?: string;
 };
 
 export type HomeContent = {
