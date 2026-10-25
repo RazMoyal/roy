@@ -30,10 +30,15 @@ export function AdminPanel() {
 
   const load = useCallback(async () => {
     setStatus("loading");
-    const res = await fetch("/api/content");
-    const data = (await res.json()) as SiteContent;
-    setContentState(data);
-    setStatus("idle");
+    try {
+      const res = await fetch("/api/content");
+      if (!res.ok) throw new Error("Failed to load content");
+      const data = (await res.json()) as SiteContent;
+      setContentState(data);
+      setStatus("idle");
+    } catch {
+      setStatus("error");
+    }
   }, []);
 
   useEffect(() => {
