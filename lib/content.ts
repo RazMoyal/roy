@@ -17,12 +17,20 @@ const CONTENT_KEY = "site-content.json";
  * The site's content lives in Netlify Blobs, not on the local disk — Netlify
  * Functions run on a read-only, per-invocation filesystem, so a plain JSON
  * file on disk can't survive a write there. Blobs give local dev and the
- * deployed site the same persistent store. Netlify injects store access
- * automatically during its own Build/Functions/Edge runtime; BLOBS_SITE_ID +
- * BLOBS_TOKEN let `next dev`/`next build` running on a developer's machine
- * reach that same remote store explicitly.
+ * deployed site the same persistent store.
+ *
+ * Netlify's deployed Functions/Edge runtime auto-injects store access via
+ * NETLIFY_BLOBS_CONTEXT — passing explicit siteID/token on top of that
+ * ambient context there makes the Blobs API reject the request ("invalid
+ * site ID"), so it must be ignored whenever that context is present. The
+ * Netlify *build* container has no such context, so `next build` running
+ * there (and `next dev`/`next build` on a developer's machine) needs
+ * BLOBS_SITE_ID + BLOBS_TOKEN to reach the same remote store explicitly.
  */
 function contentStore() {
+  if (process.env.NETLIFY_BLOBS_CONTEXT) {
+    return getStore("site-content");
+  }
   const siteID = process.env.BLOBS_SITE_ID;
   const token = process.env.BLOBS_TOKEN;
   return siteID && token
