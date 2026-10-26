@@ -17,26 +17,27 @@ export function EventCard({
   return (
     <Link
       href={`/events/${slug}`}
-      className="group flex flex-col overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm transition hover:border-amber-200 hover:shadow-md"
+      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-gold/25 bg-event-card shadow-[0_10px_30px_-18px_rgb(10_34_25/0.35)] transition duration-500 hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_22px_45px_-20px_rgb(10_34_25/0.45)]"
     >
       {coverUrl && (
-        <div className="relative aspect-[16/10] bg-stone-200">
+        <div className="relative aspect-[16/10] overflow-hidden bg-stone-200">
           <SiteImage
             src={coverUrl}
             alt={labelHe}
             fill
-            className="object-cover transition group-hover:scale-[1.02]"
+            className="object-cover transition duration-[1200ms] ease-out group-hover:scale-[1.05]"
             sizes="(max-width: 768px) 100vw, 33vw"
             loading="lazy"
             quality="auto:eco"
           />
+          <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-l from-transparent via-gold/70 to-transparent" />
         </div>
       )}
       <div className="flex flex-1 flex-col p-6">
-        <h3 className="text-xl font-semibold text-heading group-hover:text-amber-900">
+        <h3 className="font-display text-2xl text-heading transition-colors group-hover:text-amber-900">
           {labelHe}
         </h3>
-        <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-stone-600">
+        <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-event-card-muted">
           {description}
         </p>
         <div className="mt-6">

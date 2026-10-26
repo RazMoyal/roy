@@ -2,6 +2,9 @@ import Link from "next/link";
 import type { HomeContent, PriceTable, SiteContent } from "@/types/content";
 import { EventCard } from "@/components/home/EventCard";
 import { EventPriceTable } from "@/components/events/EventPriceTable";
+import { ParallaxSection } from "@/components/jungle/ParallaxSection";
+import { SectionLeaves } from "@/components/jungle/Decor";
+import { Reveal } from "@/components/jungle/Reveal";
 
 type EventsSectionProps = {
   sectionTitle: HomeContent["eventsSectionTitle"];
@@ -19,12 +22,19 @@ export function EventsSection({
   activeCategoryPriceTables,
 }: EventsSectionProps) {
   return (
-    <section id="events" className="bg-page-bg py-14 sm:py-20">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="flex flex-wrap items-baseline justify-between gap-3">
-          <h2 className="text-2xl font-semibold sm:text-3xl text-heading">
-            {activeCategoryTitle || sectionTitle}
-          </h2>
+    <ParallaxSection
+      id="events"
+      origin="center"
+      className="relative isolate bg-page-bg py-14 sm:py-24"
+    >
+      <SectionLeaves side="start" />
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
+        <Reveal className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <h2 className="font-display text-3xl text-heading sm:text-4xl">
+              {activeCategoryTitle || sectionTitle}
+            </h2>
+          </div>
           {activeCategoryTitle && (
             <Link
               href="/#events"
@@ -33,29 +43,32 @@ export function EventsSection({
               הצגת כל סוגי האירועים
             </Link>
           )}
-        </div>
+        </Reveal>
         {activeCategoryPriceTables && activeCategoryPriceTables.length > 0 && (
           <div className="mt-6 space-y-8 sm:mt-8">
             {activeCategoryPriceTables.map((priceTable) => (
-              <EventPriceTable key={priceTable.id} priceTable={priceTable} />
+              <Reveal key={priceTable.id}>
+                <EventPriceTable priceTable={priceTable} />
+              </Reveal>
             ))}
           </div>
         )}
         <div className="mt-8 grid gap-4 sm:mt-10 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {Object.entries(events).map(([slug, event]) => (
-            <EventCard
-              key={slug}
-              slug={slug}
-              labelHe={event.title || slug}
-              description={event.description}
-              coverUrl={
-                event.coverUrl ||
-                [...event.images].sort((a, b) => a.order - b.order)[0]?.url
-              }
-            />
+          {Object.entries(events).map(([slug, event], i) => (
+            <Reveal key={slug} delay={(i % 3) * 110}>
+              <EventCard
+                slug={slug}
+                labelHe={event.title || slug}
+                description={event.description}
+                coverUrl={
+                  event.coverUrl ||
+                  [...event.images].sort((a, b) => a.order - b.order)[0]?.url
+                }
+              />
+            </Reveal>
           ))}
         </div>
       </div>
-    </section>
+    </ParallaxSection>
   );
 }

@@ -24,12 +24,12 @@ const GROUPS: { title: string; fields: Field[] }[] = [
       {
         key: "primaryButton",
         label: "כפתור ראשי - רקע",
-        hint: "״גלו את סוגי האירועים״ בכותרת הראשית",
+        hint: "כפתור הוואטסאפ הצף",
       },
       {
         key: "primaryButtonText",
         label: "כפתור ראשי - טקסט",
-        hint: "צבע הטקסט על הכפתור הראשי",
+        hint: "צבע האייקון על כפתור הוואטסאפ הצף",
       },
       {
         key: "secondaryButton",
@@ -49,14 +49,14 @@ const GROUPS: { title: string; fields: Field[] }[] = [
       { key: "headerBg", label: "סרגל עליון", hint: "הפס עם הלוגו והתפריט" },
       { key: "heroBg", label: "כותרת ראשית", hint: "האזור הגדול בראש דף הבית" },
       {
-        key: "heroCardBg",
-        label: "קארד בכותרת הראשית",
-        hint: "הקארד השקוף מעל התמונה/סרטון בהירו",
-      },
-      {
         key: "pageBg",
         label: "רקע כללי",
         hint: "מקטע סוגי האירועים ועמודי האירועים",
+      },
+      {
+        key: "eventCardBg",
+        label: "קארדי סוגי אירועים",
+        hint: "רקע הקארדים בדף הבית (מתחת לתמונה). טקסט התיאור מתאים את עצמו אוטומטית",
       },
       { key: "sectionBg", label: "מקטעי תוכן", hint: "אודות ויצירת קשר" },
       { key: "footerBg", label: "פוטר", hint: "הפס התחתון של האתר" },
@@ -70,6 +70,48 @@ const GROUPS: { title: string; fields: Field[] }[] = [
         key: "accent",
         label: "צבע מבטא",
         hint: "קישורים, ״אירועים בלבד״ ומסגרות מודגשות",
+      },
+      {
+        key: "gold",
+        label: "זהב",
+        hint: "העלים העדינים ברקע סוגי האירועים, מסגרות קארדי האירועים, אייקוני יצירת הקשר והקו בתפריט",
+      },
+    ],
+  },
+  {
+    title: "קארד בכותרת הראשית",
+    fields: [
+      {
+        key: "heroCardBg",
+        label: "רקע הקארד",
+        hint: "הקארד מעל התמונה/סרטון בהירו. אטום כברירת מחדל - סרגל השקיפות מראה דרכו את הרקע",
+      },
+      { key: "heroCardTitle", label: "כותרת", hint: "הכותרת הגדולה בקארד" },
+      { key: "heroCardText", label: "טקסט משנה", hint: "השורה שמתחת לכותרת" },
+      {
+        key: "heroCardBorder",
+        label: "מסגרת",
+        hint: "המסגרת הכפולה של הקארד",
+      },
+      {
+        key: "heroChipText",
+        label: "כפתורים בקארד - טקסט",
+        hint: "״גלו את סוגי האירועים״, גלריות, אירועים פרטיים וכו׳",
+      },
+      {
+        key: "heroChipBorder",
+        label: "כפתורים בקארד - מסגרת",
+        hint: "המסגרת והרקע במעבר עכבר",
+      },
+      {
+        key: "heroChipActiveBg",
+        label: "קטגוריה נבחרת - רקע",
+        hint: "הכפתור של הקטגוריה המסוננת כרגע",
+      },
+      {
+        key: "heroChipActiveText",
+        label: "קטגוריה נבחרת - טקסט",
+        hint: "צבע הטקסט על הקטגוריה הנבחרת",
       },
     ],
   },
@@ -196,19 +238,50 @@ function Preview({ theme }: { theme: ThemeColors }) {
         className="px-6 py-8"
         style={{ background: theme.heroBg, color: textOn(theme.heroBg) }}
       >
-        <p className="text-xs font-medium" style={{ color: theme.accent }}>
-          אירועים בלבד
-        </p>
-        <p className="mt-2 text-xl font-semibold">אולם אירועים רוי</p>
-        <span
-          className="mt-4 inline-flex rounded-full px-4 py-2 text-sm font-semibold"
+        <div
+          className="mx-auto max-w-sm rounded-2xl border p-5 text-center"
           style={{
-            background: theme.primaryButton,
-            color: theme.primaryButtonText,
+            background: theme.heroCardBg,
+            borderColor: theme.heroCardBorder,
           }}
         >
-          גלו את סוגי האירועים
-        </span>
+          <p className="font-display text-xl" style={{ color: theme.heroCardTitle }}>
+            אולם אירועים רוי
+          </p>
+          <p className="mt-1 text-xs" style={{ color: theme.heroCardText }}>
+            חוויה בלתי נשכחת לכל סוגי האירועים
+          </p>
+          <div className="mt-4 flex flex-wrap justify-center gap-2">
+            <span
+              className="inline-flex rounded-full border px-3 py-1.5 text-xs font-medium"
+              style={{
+                color: theme.heroChipText,
+                borderColor: theme.heroChipBorder,
+              }}
+            >
+              גלו את סוגי האירועים
+            </span>
+            <span
+              className="inline-flex rounded-full border px-3 py-1.5 text-xs font-medium"
+              style={{
+                background: theme.heroChipActiveBg,
+                color: theme.heroChipActiveText,
+                borderColor: "transparent",
+              }}
+            >
+              קטגוריה נבחרת
+            </span>
+            <span
+              className="inline-flex rounded-full border px-3 py-1.5 text-xs font-medium"
+              style={{
+                color: theme.heroChipText,
+                borderColor: theme.heroChipBorder,
+              }}
+            >
+              גלריות
+            </span>
+          </div>
+        </div>
       </div>
       <div className="px-6 py-6" style={{ background: theme.sectionBg }}>
         <p className="text-lg font-semibold" style={{ color: theme.headings }}>
@@ -219,9 +292,21 @@ function Preview({ theme }: { theme: ThemeColors }) {
         <p className="text-lg font-semibold" style={{ color: theme.headings }}>
           סוגי אירועים
         </p>
-        <div className="mt-3 inline-block rounded-xl border border-stone-200 bg-white p-4">
+        <p className="mt-1 text-xs font-medium" style={{ color: theme.accent }}>
+          אירועים בלבד
+        </p>
+        <div
+          className="mt-3 inline-block rounded-xl border border-stone-200 p-4"
+          style={{ background: theme.eventCardBg }}
+        >
           <p className="font-semibold" style={{ color: theme.headings }}>
             חתונה
+          </p>
+          <p
+            className="mt-1 text-xs"
+            style={{ color: textOn(theme.eventCardBg, "#57534e", "#d6d3d1") }}
+          >
+            גלריית תמונות ופרטים
           </p>
           <span
             className="mt-3 inline-flex rounded-full px-3 py-1.5 text-xs font-medium"
@@ -293,8 +378,8 @@ export function ThemeEditor({ theme, onChange }: ThemeEditorProps) {
     <div className="space-y-8">
       <p className="text-sm text-stone-500">
         הצבעים חלים על כל עמודי האתר (לא על עמוד הניהול). צבע הטקסט על כפתורים
-        ורקעים נבחר אוטומטית (בהיר או כהה) כדי שיהיה קריא. השינוי ייראה באתר
-        אחרי שמירה.
+        ורקעים נבחר אוטומטית (בהיר או כהה) כדי שיהיה קריא - חוץ מהקארד בכותרת
+        הראשית, שבו כל צבע נבחר בקבוצה שלו. השינוי ייראה באתר אחרי שמירה.
       </p>
 
       {GROUPS.map((group) => (

@@ -15,7 +15,7 @@ export function EventPriceTable({ priceTable }: EventPriceTableProps) {
         </h2>
       </div>
       <div className="overflow-x-auto px-6 sm:px-8">
-        <table className="w-full min-w-max text-right">
+        <table className="w-full min-w-[36rem] text-right">
           <thead>
             <tr className="border-b border-price-border">
               {priceTable.columns.map((column, index) => (

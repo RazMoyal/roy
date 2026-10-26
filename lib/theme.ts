@@ -10,8 +10,16 @@ export const DEFAULT_THEME: ThemeColors = {
   secondaryButtonText: "#ffffff",
   headerBg: "#ffffff",
   heroBg: "#0c0a09",
-  heroCardBg: "#ffffff",
+  heroCardBg: "#0b241b",
+  heroCardTitle: "#f6efdc",
+  heroCardText: "#c8d2c4",
+  heroCardBorder: "#c9a35b",
+  heroChipText: "#f6efdc",
+  heroChipBorder: "#c9a35b",
+  heroChipActiveBg: "#c9a35b",
+  heroChipActiveText: "#0b241b",
   pageBg: "#fafaf9",
+  eventCardBg: "#ffffff",
   sectionBg: "#ffffff",
   footerBg: "#0c0a09",
   priceTableHeaderBg: "#fdf6e3",
@@ -20,9 +28,18 @@ export const DEFAULT_THEME: ThemeColors = {
   priceTableRowText: "#292524",
   priceTablePriceText: "#92400e",
   priceTableBorder: "#e7e5e4",
+  gold: "#c9a35b",
 };
 
 export const THEME_KEYS = Object.keys(DEFAULT_THEME) as (keyof ThemeColors)[];
+
+/**
+ * Defaults from before the jungle redesign. A saved color still equal to its
+ * old default was never customized, so it follows the new default instead.
+ */
+const LEGACY_DEFAULTS: Partial<ThemeColors> = {
+  heroCardBg: "#ffffff",
+};
 
 /** 6-digit hex, optionally followed by a 2-digit alpha channel (CSS #RRGGBBAA). */
 const HEX_COLOR_ALPHA = /^#[0-9a-fA-F]{6}([0-9a-fA-F]{2})?$/;
@@ -86,6 +103,22 @@ function textOn(bg: string, kind: keyof typeof TEXT_ON): string {
 }
 
 /**
+ * Colors that map one-to-one onto a CSS token (--color-<token>), with no
+ * derived text color.
+ */
+const DIRECT_TOKENS: Partial<Record<keyof ThemeColors, string>> = {
+  heroCardBg: "hero-card",
+  heroCardTitle: "hero-card-title",
+  heroCardText: "hero-card-text",
+  heroCardBorder: "hero-card-border",
+  heroChipText: "hero-chip-fg",
+  heroChipBorder: "hero-chip-border",
+  heroChipActiveBg: "hero-chip-active",
+  heroChipActiveText: "hero-chip-active-fg",
+  gold: "gold",
+};
+
+/**
  * CSS overriding the site color tokens for every color changed from the
  * default. Unchanged colors are left to the stylesheet as designed.
  */
@@ -136,16 +169,15 @@ export function buildThemeCss(theme: ThemeColors): string {
       `--color-hero-muted: ${textOn(c, "muted")};`,
     );
   }
-  if (changed("heroCardBg")) {
-    const c = theme.heroCardBg;
-    vars.push(
-      `--color-hero-card: ${c};`,
-      `--color-hero-card-fg: ${textOn(c, "fg")};`,
-      `--color-hero-card-muted: ${textOn(c, "muted")};`,
-    );
-  }
   if (changed("pageBg")) {
     vars.push(`--color-page-bg: ${theme.pageBg};`);
+  }
+  if (changed("eventCardBg")) {
+    const c = theme.eventCardBg;
+    vars.push(
+      `--color-event-card: ${c};`,
+      `--color-event-card-muted: ${textOn(c, "muted")};`,
+    );
   }
   if (changed("sectionBg")) {
     vars.push(`--color-section-bg: ${theme.sectionBg};`);
@@ -176,6 +208,11 @@ export function buildThemeCss(theme: ThemeColors): string {
   if (changed("priceTableBorder")) {
     vars.push(`--color-price-border: ${theme.priceTableBorder};`);
   }
+  for (const [key, token] of Object.entries(DIRECT_TOKENS)) {
+    if (changed(key as keyof ThemeColors)) {
+      vars.push(`--color-${token}: ${theme[key as keyof ThemeColors]};`);
+    }
+  }
 
   return vars.length ? `:root { ${vars.join(" ")} }` : "";
 }
@@ -187,7 +224,9 @@ export function normalizeTheme(
   const result = { ...DEFAULT_THEME };
   for (const key of THEME_KEYS) {
     const value = theme?.[key];
-    if (typeof value === "string") result[key] = value;
+    if (typeof value === "string" && value !== LEGACY_DEFAULTS[key]) {
+      result[key] = value;
+    }
   }
   return result;
 }

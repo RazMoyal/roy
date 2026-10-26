@@ -100,7 +100,7 @@ export function CategoryEditor({
                   <input
                     type="radio"
                     name={`category-type-${slug}`}
-                    checked={category.type !== "gallery"}
+                    checked={category.type === "regular"}
                     onChange={() =>
                       updateCategory(slug, { ...category, type: "regular" })
                     }
@@ -129,6 +129,24 @@ export function CategoryEditor({
                     <span className="mx-1 text-stone-400">·</span>
                     <span className="text-xs text-stone-500">
                       דף נפרד עם התמונות של כל סוגי האירועים בקטגוריה
+                    </span>
+                  </span>
+                </label>
+                <label className="flex items-center gap-2 rounded-lg border border-stone-200 bg-white px-3 py-2 text-sm text-stone-800">
+                  <input
+                    type="radio"
+                    name={`category-type-${slug}`}
+                    checked={category.type === "direct"}
+                    onChange={() =>
+                      updateCategory(slug, { ...category, type: "direct" })
+                    }
+                    className="h-4 w-4 border-stone-300"
+                  />
+                  <span>
+                    ישיר
+                    <span className="mx-1 text-stone-400">·</span>
+                    <span className="text-xs text-stone-500">
+                      הכפתור פותח ישירות את עמוד סוג האירוע הראשון בקטגוריה
                     </span>
                   </span>
                 </label>

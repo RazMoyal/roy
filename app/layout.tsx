@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
-import { Heebo } from "next/font/google";
+import { Bellefair, Heebo } from "next/font/google";
 import "./globals.css";
 
 const heebo = Heebo({
   variable: "--font-heebo",
   subsets: ["hebrew", "latin"],
   weight: ["400", "500", "600", "700"],
+});
+
+const bellefair = Bellefair({
+  variable: "--font-bellefair",
+  subsets: ["hebrew", "latin"],
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -22,7 +28,7 @@ export default function RootLayout({
     <html
       lang="he"
       dir="rtl"
-      className={`${heebo.variable} h-full`}
+      className={`${heebo.variable} ${bellefair.variable} h-full`}
       data-scroll-behavior="smooth"
       suppressHydrationWarning
     >

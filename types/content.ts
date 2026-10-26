@@ -53,8 +53,9 @@ export type HomeContent = {
  * "regular" filters the home page's event type grid in place.
  * "gallery" links to a dedicated page stacking every event type's photos
  * under its name, instead of filtering the home page.
+ * "direct" links straight to the page of its first event type.
  */
-export type CategoryDisplayType = "regular" | "gallery";
+export type CategoryDisplayType = "regular" | "gallery" | "direct";
 
 export type EventCategory = {
   title: string;
@@ -75,7 +76,15 @@ export type ThemeColors = {
   headerBg: string;
   heroBg: string;
   heroCardBg: string;
+  heroCardTitle: string;
+  heroCardText: string;
+  heroCardBorder: string;
+  heroChipText: string;
+  heroChipBorder: string;
+  heroChipActiveBg: string;
+  heroChipActiveText: string;
   pageBg: string;
+  eventCardBg: string;
   sectionBg: string;
   footerBg: string;
   priceTableHeaderBg: string;
@@ -84,6 +93,7 @@ export type ThemeColors = {
   priceTableRowText: string;
   priceTablePriceText: string;
   priceTableBorder: string;
+  gold: string;
 };
 
 export type SiteContent = {

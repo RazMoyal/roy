@@ -93,7 +93,10 @@ function mergeWithDefaults(parsed: SiteContent): SiteContent {
         (s) => s in events,
       ),
       priceTables: normalizePriceTables(priceTables, legacyPriceTable),
-      type: category?.type === "gallery" ? "gallery" : "regular",
+      type:
+        category?.type === "gallery" || category?.type === "direct"
+          ? category.type
+          : "regular",
     };
   }
 
