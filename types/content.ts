@@ -75,6 +75,8 @@ export type ThemeColors = {
   secondaryButtonText: string;
   headerBg: string;
   heroBg: string;
+  heroTitle: string;
+  heroSubtitle: string;
   heroCardBg: string;
   heroCardTitle: string;
   heroCardText: string;

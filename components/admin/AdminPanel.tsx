@@ -252,6 +252,7 @@ export function AdminPanel() {
           ) : tab === "theme" ? (
             <ThemeEditor
               theme={content.theme}
+              heroText={content.home}
               onChange={(theme) => setContent({ ...content, theme })}
             />
           ) : tab === "categories" ? (

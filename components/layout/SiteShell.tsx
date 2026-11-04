@@ -15,7 +15,7 @@ export async function SiteShell({ children }: SiteShellProps) {
   return (
     <>
       {themeCss && <style>{themeCss}</style>}
-      <Header />
+      <Header showAbout={Boolean(home.aboutText?.trim())} />
       <div className="flex-1">{children}</div>
       <Footer />
       <FloatingContactButtons phone={home.phone} whatsappPhone={home.whatsappPhone} />

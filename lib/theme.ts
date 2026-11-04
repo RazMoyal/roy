@@ -10,6 +10,8 @@ export const DEFAULT_THEME: ThemeColors = {
   secondaryButtonText: "#ffffff",
   headerBg: "#ffffff",
   heroBg: "#0c0a09",
+  heroTitle: "#ffffff",
+  heroSubtitle: "#ffffffe6",
   heroCardBg: "#0b241b",
   heroCardTitle: "#f6efdc",
   heroCardText: "#c8d2c4",
@@ -98,7 +100,7 @@ const TEXT_ON = {
   footerMuted: ["#78716c", "#a8a29e"],
 } as const;
 
-function textOn(bg: string, kind: keyof typeof TEXT_ON): string {
+export function textOn(bg: string, kind: keyof typeof TEXT_ON): string {
   return TEXT_ON[kind][isLightColor(bg) ? 0 : 1];
 }
 
@@ -107,6 +109,8 @@ function textOn(bg: string, kind: keyof typeof TEXT_ON): string {
  * derived text color.
  */
 const DIRECT_TOKENS: Partial<Record<keyof ThemeColors, string>> = {
+  heroTitle: "hero-title",
+  heroSubtitle: "hero-subtitle",
   heroCardBg: "hero-card",
   heroCardTitle: "hero-card-title",
   heroCardText: "hero-card-text",
